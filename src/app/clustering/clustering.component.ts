@@ -20,15 +20,15 @@ export class ClusteringComponent implements OnInit {
   private data = [
     {
       hashtag: '#first',
-      numElectrons: 10
+      numElectrons: 8
     },
     {
       hashtag: '#second',
-      numElectrons: 20
+      numElectrons: 32
     },
     {
       hashtag: '#third',
-      numElectrons: 30
+      numElectrons: 117
     }
   ];
 
