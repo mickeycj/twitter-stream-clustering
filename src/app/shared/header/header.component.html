@@ -1,3 +1,10 @@
-<p>
-  header works!
-</p>
+<mat-toolbar color="primary">
+  <span>{{ title }}</span>
+  <button mat-icon-button [mat-menu-trigger-for]="menu">
+    <mat-icon>more_vert</mat-icon>
+  </button>
+</mat-toolbar>
+<mat-menu x-position="before" #menu="matMenu">
+  <button mat-menu-item>Home</button>
+  <button mat-menu-item>About</button>
+</mat-menu>
