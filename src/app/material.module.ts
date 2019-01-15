@@ -12,5 +12,4 @@ import {
 
   ]
 })
-
 export class MaterialModule { }
