@@ -83,5 +83,6 @@ export const ORBITALS = [
 export const SHELL_RATIO = 2.3;
 export const ELECTRON = {
   RATIO: 10,
-  SPEED: 2.5
+  SPEED: 2.5,
+  SPEED_OFFSET: .25
 };

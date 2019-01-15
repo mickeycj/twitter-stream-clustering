@@ -43,6 +43,9 @@ export class ClusteringComponent implements OnInit {
 
       let width = sketch.windowWidth * .9;
       let height = sketch.windowHeight * .8;
+      let background = '#BBBBBB';
+      let framerate = 60;
+
       let diameter = width * .05;
 
       let randomPosition = () => {
@@ -54,8 +57,11 @@ export class ClusteringComponent implements OnInit {
 
       sketch.setup = () => {
         sketch.createCanvas(width, height);
-        sketch.background('#BBBBBB');
+        sketch.frameRate(framerate);
 
+        sketch.ellipseMode(sketch.CENTER);
+        sketch.angleMode(sketch.DEGREES);
+        
         this.atoms = this.data.map((datum) => {
           const { x, y } = randomPosition();
           return new Atom(datum.hashtag, x, y, diameter, datum.numElectrons);
@@ -63,6 +69,8 @@ export class ClusteringComponent implements OnInit {
       };
 
       sketch.draw = () => {
+        sketch.background(background);
+
         this.atoms.forEach((atom) => atom.draw(sketch));
       };
 

@@ -1,6 +1,7 @@
 import { COLORS, ELECTRON, SHELL_RATIO } from './constants';
 
 import { Atom } from './atom.model';
+import { Electron } from './electron.model';
 
 export class Shell {
 
@@ -10,7 +11,7 @@ export class Shell {
   level: number;
   electronDiameter: number;
 
-  // electrons: Electron[];
+  electrons: Electron[];
 
   constructor(atom: Atom, level: number, numElectrons: number) {
     this.x = atom.x;
@@ -19,10 +20,10 @@ export class Shell {
     this.level = level;
     this.electronDiameter = atom.diameter / ELECTRON.RATIO;
 
-    // this.electrons = [];
-    // for (let angle = -90; angle > -450; angle -= 360 / numElectrons) {
-    //   this.electrons.push(new ELECTRON(this, angle, this.electronDiameter));
-    // }
+    this.electrons = [];
+    for (let angle = -90; angle > -450; angle -= 360 / numElectrons) {
+      this.electrons.push(new Electron(this, angle, this.electronDiameter));
+    }
   }
 
   draw(sketch) {
@@ -30,7 +31,7 @@ export class Shell {
     sketch.noFill();
     sketch.ellipse(this.x, this.y, this.diameter);
 
-    // this.electrons.forEach((electron) => electron.draw(sketch));
+    this.electrons.forEach((electron) => electron.draw(sketch));
   }
 
 }
