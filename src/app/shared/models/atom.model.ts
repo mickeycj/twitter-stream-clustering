@@ -1,5 +1,7 @@
 import { COLORS, ORBITALS } from './constants';
 
+import { Shell } from './shell.model';
+
 export class Atom {
 
   hashtag: string;
@@ -8,7 +10,7 @@ export class Atom {
   y: number;
   diameter: number;
 
-  // shells: Shell[];
+  shells: Shell[];
 
   constructor(hashtag: string, x: number, y: number, diameter: number, numElectrons: number) {
     this.hashtag = hashtag;
@@ -17,12 +19,10 @@ export class Atom {
     this.y = y;
     this.diameter = diameter;
 
-    console.log(diameter);
-
-    // this.shells = [];
-    // this.getElectronConfiguration(numElectrons).forEach((numElectrons, index) => {
-    //   this.shells.push(new this.shells(this, index + 1, numElectrons));
-    // });
+    this.shells = [];
+    this.getElectronConfiguration(numElectrons).forEach((numElectrons, index) => {
+      this.shells.push(new Shell(this, index + 1, numElectrons));
+    });
   }
 
   getElectronConfiguration(numElectrons: number) {
@@ -55,7 +55,7 @@ export class Atom {
     sketch.fill(COLORS.GRAY);
     sketch.ellipse(this.x, this.y, this.diameter);
 
-    // this.shells.forEach((shell) => shell.draw(sketch));
+    this.shells.forEach((shell) => shell.draw(sketch));
   }
 
 }
