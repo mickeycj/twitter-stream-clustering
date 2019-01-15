@@ -41,17 +41,18 @@ export class ClusteringComponent implements OnInit {
   createCanvas() {
     return new p5((sketch: any) => {
 
-      let width = sketch.windowWidth * .9;
+      let width = sketch.windowWidth * .99;
       let height = sketch.windowHeight * .8;
-      let background = '#BBBBBB';
+      let background = '#FFFFFF';
       let framerate = 60;
+      let buffer = 400;
 
       let diameter = width * .05;
 
       let randomPosition = () => {
         return {
-          x: Math.random() * (width - 240) + 120,
-          y: Math.random() * (height - 240) + 120
+          x: Math.random() * (width - buffer) + buffer / 2,
+          y: Math.random() * (height - buffer) + buffer / 2
         };
       };
 
