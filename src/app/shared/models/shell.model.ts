@@ -27,11 +27,11 @@ export class Shell {
   }
 
   draw(sketch: any) {
+    this.electrons.forEach((electron) => electron.draw(sketch));
+    
     sketch.stroke(COLORS.GRAY);
     sketch.noFill();
     sketch.ellipse(this.x, this.y, this.diameter);
-
-    this.electrons.forEach((electron) => electron.draw(sketch));
   }
 
 }

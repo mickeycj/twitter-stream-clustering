@@ -51,11 +51,11 @@ export class Atom {
   }
 
   draw(sketch: any) {
+    this.shells.forEach((shell) => shell.draw(sketch));
+
     sketch.noStroke();
     sketch.fill(COLORS.GRAY);
     sketch.ellipse(this.x, this.y, this.diameter);
-
-    this.shells.forEach((shell) => shell.draw(sketch));
   }
 
 }
