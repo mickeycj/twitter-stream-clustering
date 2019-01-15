@@ -22,7 +22,7 @@ export class ClusteringComponent implements OnInit {
   createCanvas() {
     return new p5((sketch: any) => {
       sketch.setup = () => {
-        sketch.createCanvas(sketch.windowWidth * .9, sketch.windowHeight * .7);
+        sketch.createCanvas(sketch.windowWidth * .9, sketch.windowHeight * .8);
         sketch.background('#BBBBBB');
       };
 
