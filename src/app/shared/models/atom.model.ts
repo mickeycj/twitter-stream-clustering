@@ -50,7 +50,7 @@ export class Atom {
     return configuration;
   }
 
-  draw(sketch) {
+  draw(sketch: any) {
     sketch.noStroke();
     sketch.fill(COLORS.GRAY);
     sketch.ellipse(this.x, this.y, this.diameter);

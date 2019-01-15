@@ -26,7 +26,7 @@ export class Shell {
     }
   }
 
-  draw(sketch) {
+  draw(sketch: any) {
     sketch.stroke(COLORS.GRAY);
     sketch.noFill();
     sketch.ellipse(this.x, this.y, this.diameter);

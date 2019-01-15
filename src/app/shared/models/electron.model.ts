@@ -25,7 +25,7 @@ export class Electron {
     this.electronDiameter = electronDiameter;
   }
 
-  draw(sketch) {
+  draw(sketch: any) {
     const x = this.shellX + this.shellRadius * sketch.cos(this.angle);
     const y = this.shellY + this.shellRadius * sketch.sin(this.angle);
 
