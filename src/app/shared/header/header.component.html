@@ -1,0 +1,10 @@
+<mat-toolbar color="primary">
+  <span><a routerLink="/">{{ title }}</a></span>
+  <button mat-icon-button [mat-menu-trigger-for]="menu">
+    <mat-icon>more_vert</mat-icon>
+  </button>
+</mat-toolbar>
+<mat-menu x-position="before" #menu="matMenu">
+  <button mat-menu-item routerLink="/home">Home</button>
+  <button mat-menu-item routerLink="/about">About</button>
+</mat-menu>
