@@ -1,5 +1,6 @@
 export const COLORS = {
-  GRAY: '#888888'
+  GRAY: '#888888',
+  WHITE: '#FFFFFF'
 };
 
 export const ORBITALS = [

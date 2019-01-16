@@ -56,6 +56,9 @@ export class Atom {
     sketch.noStroke();
     sketch.fill(COLORS.GRAY);
     sketch.ellipse(this.x, this.y, this.diameter);
+
+    sketch.fill(COLORS.WHITE);
+    sketch.text(this.hashtag, this.x, this.y, this.diameter, this.diameter / 2);
   }
 
 }

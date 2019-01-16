@@ -61,7 +61,10 @@ export class ClusteringComponent implements OnInit {
         sketch.frameRate(framerate);
 
         sketch.ellipseMode(sketch.CENTER);
+        sketch.rectMode(sketch.CENTER);
         sketch.angleMode(sketch.DEGREES);
+
+        sketch.textAlign(sketch.CENTER, sketch.CENTER);
         
         this.atoms = this.data.map((datum) => {
           const { x, y } = randomPosition();
