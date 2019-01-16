@@ -1,3 +1,7 @@
 <div id="sketch-clustering"></div>
 
-<mat-slider id="slider-size" min="0" max="100" step="5" value="75"></mat-slider>
+<mat-slider id="slider-size"
+            [min]="minValue" [max]="maxValue"
+            [step]="stepValue" [value]="startingValue"
+            (input)="onSliderChanged($event)">
+</mat-slider>

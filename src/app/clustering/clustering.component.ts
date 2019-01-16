@@ -17,6 +17,13 @@ export class ClusteringComponent implements OnInit {
 
   private atoms: Atom[];
 
+  minValue: number;
+  maxValue: number;
+  stepValue: number;
+  startingValue: number;
+
+  minSize: number;
+
   private data = [
     {
       hashtag: '#first',
@@ -35,10 +42,19 @@ export class ClusteringComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    this.minValue = 1;
+    this.maxValue = 115;
+    this.stepValue = 5;
+    this.startingValue = this.minSize = 25;
+
     this.sketch = this.createCanvas();
   }
 
-  createCanvas() {
+  onSliderChanged(event: any) {
+    this.minSize = event.value;
+  }
+
+  private createCanvas() {
     return new p5((sketch: any) => {
 
       let width = sketch.windowWidth * .99;
@@ -75,7 +91,7 @@ export class ClusteringComponent implements OnInit {
       sketch.draw = () => {
         sketch.background(background);
 
-        this.atoms.forEach((atom) => atom.draw(sketch));
+        this.atoms.filter((atom) => atom.numElectrons >= this.minSize).forEach((atom) => atom.draw(sketch));
       };
 
     }, this.sketchId);

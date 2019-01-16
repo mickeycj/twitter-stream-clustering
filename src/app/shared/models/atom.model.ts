@@ -10,6 +10,7 @@ export class Atom {
   y: number;
   diameter: number;
 
+  numElectrons: number;
   shells: Shell[];
 
   constructor(hashtag: string, x: number, y: number, diameter: number, numElectrons: number) {
@@ -19,6 +20,7 @@ export class Atom {
     this.y = y;
     this.diameter = diameter;
 
+    this.numElectrons = numElectrons;
     this.shells = [];
     this.getElectronConfiguration(numElectrons).forEach((numElectrons, index) => {
       this.shells.push(new Shell(this, index + 1, numElectrons));
