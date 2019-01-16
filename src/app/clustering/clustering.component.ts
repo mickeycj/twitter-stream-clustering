@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { Atom } from './../shared/models/atom.model';
 
-import 'p5';
+const p5 = require('p5');
 
 @Component({
   selector: 'app-clustering',
