@@ -27,7 +27,7 @@ export class ClusteringComponent implements OnInit {
   private data = [
     {
       hashtag: '#first',
-      numElectrons: 8
+      numElectrons: 117
     },
     {
       hashtag: '#second',
@@ -35,7 +35,7 @@ export class ClusteringComponent implements OnInit {
     },
     {
       hashtag: '#third',
-      numElectrons: 117
+      numElectrons: 8
     }
   ];
 
