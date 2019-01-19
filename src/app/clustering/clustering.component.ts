@@ -12,8 +12,6 @@ const p5 = require('p5');
 export class ClusteringComponent implements OnInit {
 
   private sketchId = 'sketch-clustering';
-  
-  private sketch: any;
 
   private atoms: Atom[];
 
@@ -47,7 +45,7 @@ export class ClusteringComponent implements OnInit {
     this.stepValue = 5;
     this.startingValue = this.minSize = 25;
 
-    this.sketch = this.createCanvas();
+    this.createCanvas();
   }
 
   onSliderChanged(event: any) {
@@ -55,7 +53,7 @@ export class ClusteringComponent implements OnInit {
   }
 
   private createCanvas() {
-    return new p5((sketch: any) => {
+    new p5((sketch: any) => {
 
       let width = sketch.windowWidth * .99;
       let height = sketch.windowHeight * .8;
