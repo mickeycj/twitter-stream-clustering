@@ -1,3 +1,5 @@
+declare var require: any
+
 import { Component, OnInit } from '@angular/core';
 
 import { Atom } from './../shared/models/atom.model';
