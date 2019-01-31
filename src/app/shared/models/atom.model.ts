@@ -36,18 +36,8 @@ export class Atom {
     });
 
     this.bound = this.shells[this.shells.length - 1].diameter / 2;
-    if (this.position.x - this.bound < 0) {
-      this.position.x = this.bound;
-    }
-    if (this.position.x + this.bound > sketch.windowWidth * .99) {
-      this.position.x = sketch.windowWidth * .99 - this.bound;
-    }
-    if (this.position.y - this.bound < 0) {
-      this.position.y = this.bound;
-    }
-    if (this.position.y + this.bound > sketch.windowHeight * .8) {
-      this.position.y = sketch.windowHeight * .8 - this.bound;
-    }
+    this.checkHorizontalBounds(sketch);
+    this.checkVerticalBounds(sketch);
   }
 
   getElectronConfiguration(numElectrons: number) {
@@ -75,6 +65,24 @@ export class Atom {
     return configuration;
   }
 
+  checkHorizontalBounds(sketch: any) {
+    if (this.position.x - this.bound < 0) {
+      this.position.x = this.bound;
+    }
+    if (this.position.x + this.bound > sketch.windowWidth * .99) {
+      this.position.x = sketch.windowWidth * .99 - this.bound;
+    }
+  }
+
+  checkVerticalBounds(sketch: any) {
+    if (this.position.y - this.bound < 0) {
+      this.position.y = this.bound;
+    }
+    if (this.position.y + this.bound > sketch.windowHeight * .8) {
+      this.position.y = sketch.windowHeight * .8 - this.bound;
+    }
+  }
+
   draw(sketch: any) {
     this.shells.forEach((shell) => shell.draw(sketch));
 
@@ -89,22 +97,12 @@ export class Atom {
       this.velocity = sketch.createVector(MAX_VELOCITY * this.direction.x, MAX_VELOCITY * this.direction.y);
     }
     if (this.position.x - this.bound < 0 || this.position.x + this.bound > sketch.windowWidth * .99) {
-      if (this.position.x - this.bound < 0) {
-        this.position.x = this.bound;
-      }
-      if (this.position.x + this.bound > sketch.windowWidth * .99) {
-        this.position.x = sketch.windowWidth * .99 - this.bound;
-      }
+      this.checkHorizontalBounds(sketch);
       this.velocity.x = -this.velocity.x;
       this.direction.x = -this.direction.x;
     }
     if (this.position.y - this.bound < 0 || this.position.y + this.bound > sketch.windowHeight * .8) {
-      if (this.position.y - this.bound < 0) {
-        this.position.y = this.bound;
-      }
-      if (this.position.y + this.bound > sketch.windowHeight * .8) {
-        this.position.y = sketch.windowHeight * .8 - this.bound;
-      }
+      this.checkVerticalBounds(sketch);
       this.velocity.y = -this.velocity.y;
       this.direction.y = -this.direction.y;
     }
