@@ -89,7 +89,7 @@ export class ClusteringComponent implements OnInit {
       };
 
       sketch.draw = () => {
-        sketch.background(background);
+        sketch.clear();
 
         this.atoms.filter((atom) => atom.numElectrons >= this.minSize).forEach((atom) => atom.draw(sketch));
       };
