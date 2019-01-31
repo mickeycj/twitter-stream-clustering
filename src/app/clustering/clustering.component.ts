@@ -31,11 +31,19 @@ export class ClusteringComponent implements OnInit {
     },
     {
       hashtag: '#second',
-      numElectrons: 32
+      numElectrons: 18
     },
     {
       hashtag: '#third',
+      numElectrons: 64
+    },
+    {
+      hashtag: '#fourth',
       numElectrons: 8
+    },
+    {
+      hashtag: '#fifth',
+      numElectrons: 99
     }
   ];
 
@@ -59,7 +67,6 @@ export class ClusteringComponent implements OnInit {
 
       const width = sketch.windowWidth * .99;
       const height = sketch.windowHeight * .8;
-      const background = '#FFFFFF';
       const framerate = 60;
       const buffer = 400;
 
