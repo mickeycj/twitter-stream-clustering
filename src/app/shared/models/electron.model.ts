@@ -20,7 +20,6 @@ export class Electron {
     this.shellSpeedOffset = shell.level - ELECTRON.SPEED_OFFSET;
 
     this.angle = angle;
-    console.log(angle);
 
     this.electronDiameter = electronDiameter;
   }
