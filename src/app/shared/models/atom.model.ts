@@ -18,6 +18,8 @@ export class Atom {
   numElectrons: number;
   shells: Shell[];
 
+  bound: number;
+
   constructor(hashtag: string, x: number, y: number, diameter: number, numElectrons: number, sketch: any) {
     this.hashtag = hashtag;
 
@@ -32,6 +34,8 @@ export class Atom {
     this.getElectronConfiguration(numElectrons).forEach((numElectrons, index) => {
       this.shells.push(new Shell(this, index + 1, numElectrons));
     });
+
+    this.bound = this.shells[this.shells.length - 1].diameter / 2;
   }
 
   getElectronConfiguration(numElectrons: number) {
@@ -69,6 +73,12 @@ export class Atom {
     sketch.fill(COLORS.WHITE);
     sketch.text(this.hashtag, this.position.x, this.position.y, this.diameter, this.diameter / 2);
 
+    if (this.position.x - this.bound < 0 || this.position.x + this.bound > sketch.windowWidth * .99) {
+      this.velocity.x = -this.velocity.x;
+    }
+    if (this.position.y - this.bound < 0 || this.position.y + this.bound > sketch.windowHeight * .8) {
+      this.velocity.y = -this.velocity.y;
+    }
     this.position.add(this.velocity);
   }
 
