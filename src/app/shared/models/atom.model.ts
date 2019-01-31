@@ -1,15 +1,12 @@
-declare var require: any;
-
-import { COLORS, MAX_VELOCITY, ORBITALS } from './constants';
+import { COLORS, DRAG_RATIO, MAX_VELOCITY, MOVE_FREQUENCY, ORBITALS } from './constants';
 
 import { Shell } from './shell.model';
-
-const p5 = require('p5');
 
 export class Atom {
 
   hashtag: string;
 
+  direction: any;
   position: any;
   velocity: any;
 
@@ -23,9 +20,12 @@ export class Atom {
   constructor(hashtag: string, x: number, y: number, diameter: number, numElectrons: number, sketch: any) {
     this.hashtag = hashtag;
 
+    this.direction = {
+      x: (Math.random()) < 0.5 ? 1 : -1,
+      y: (Math.random()) < 0.5 ? 1 : -1
+    };
     this.position = sketch.createVector(x, y);
-    this.velocity = p5.Vector.random2D();
-    this.velocity.setMag(MAX_VELOCITY);
+    this.velocity = sketch.createVector(MAX_VELOCITY * this.direction.x, MAX_VELOCITY * this.direction.y);
 
     this.diameter = diameter;
 
@@ -36,6 +36,18 @@ export class Atom {
     });
 
     this.bound = this.shells[this.shells.length - 1].diameter / 2;
+    if (this.position.x - this.bound < 0) {
+      this.position.x = this.bound;
+    }
+    if (this.position.x + this.bound > sketch.windowWidth * .99) {
+      this.position.x = sketch.windowWidth * .99 - this.bound;
+    }
+    if (this.position.y - this.bound < 0) {
+      this.position.y = this.bound;
+    }
+    if (this.position.y + this.bound > sketch.windowHeight * .8) {
+      this.position.y = sketch.windowHeight * .8 - this.bound;
+    }
   }
 
   getElectronConfiguration(numElectrons: number) {
@@ -73,13 +85,31 @@ export class Atom {
     sketch.fill(COLORS.WHITE);
     sketch.text(this.hashtag, this.position.x, this.position.y, this.diameter, this.diameter / 2);
 
+    if (sketch.frameCount % MOVE_FREQUENCY === 0) {
+      this.velocity = sketch.createVector(MAX_VELOCITY * this.direction.x, MAX_VELOCITY * this.direction.y);
+    }
     if (this.position.x - this.bound < 0 || this.position.x + this.bound > sketch.windowWidth * .99) {
+      if (this.position.x - this.bound < 0) {
+        this.position.x = this.bound;
+      }
+      if (this.position.x + this.bound > sketch.windowWidth * .99) {
+        this.position.x = sketch.windowWidth * .99 - this.bound;
+      }
       this.velocity.x = -this.velocity.x;
+      this.direction.x = -this.direction.x;
     }
     if (this.position.y - this.bound < 0 || this.position.y + this.bound > sketch.windowHeight * .8) {
+      if (this.position.y - this.bound < 0) {
+        this.position.y = this.bound;
+      }
+      if (this.position.y + this.bound > sketch.windowHeight * .8) {
+        this.position.y = sketch.windowHeight * .8 - this.bound;
+      }
       this.velocity.y = -this.velocity.y;
+      this.direction.y = -this.direction.y;
     }
     this.position.add(this.velocity);
+    this.velocity.mult(1.0 - DRAG_RATIO);
   }
 
 }
