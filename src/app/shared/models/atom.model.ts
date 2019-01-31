@@ -1,6 +1,10 @@
-import { COLORS, DRAG_RATIO, MAX_VELOCITY, MOVE_FREQUENCY, ORBITALS } from './constants';
+declare var require: any;
+
+import { COLORS, DRAG_RATIO, MOVE_FREQUENCY, ORBITALS, VELOCITY_MULT } from './constants';
 
 import { Shell } from './shell.model';
+
+const p5 = require('p5');
 
 export class Atom {
 
@@ -21,11 +25,11 @@ export class Atom {
     this.hashtag = hashtag;
 
     this.direction = {
-      x: (Math.random()) < 0.5 ? 1 : -1,
-      y: (Math.random()) < 0.5 ? 1 : -1
+      x: (Math.random()) < 0.5 ? VELOCITY_MULT : -VELOCITY_MULT,
+      y: (Math.random()) < 0.5 ? VELOCITY_MULT : -VELOCITY_MULT
     };
     this.position = sketch.createVector(x, y);
-    this.velocity = sketch.createVector(MAX_VELOCITY * this.direction.x, MAX_VELOCITY * this.direction.y);
+    this.setSpeed(sketch);
 
     this.diameter = diameter;
 
@@ -38,6 +42,12 @@ export class Atom {
     this.bound = this.shells[this.shells.length - 1].diameter / 2;
     this.checkHorizontalBounds(sketch);
     this.checkVerticalBounds(sketch);
+  }
+
+  setSpeed(sketch: any) {
+    this.velocity = p5.Vector.random2D(sketch);
+    this.velocity.x *= this.direction.x;
+    this.velocity.y *= this.direction.y;
   }
 
   getElectronConfiguration(numElectrons: number) {
@@ -94,7 +104,7 @@ export class Atom {
     sketch.text(this.hashtag, this.position.x, this.position.y, this.diameter, this.diameter / 2);
 
     if (sketch.frameCount % MOVE_FREQUENCY === 0) {
-      this.velocity = sketch.createVector(MAX_VELOCITY * this.direction.x, MAX_VELOCITY * this.direction.y);
+      this.setSpeed(sketch);
     }
     if (this.position.x - this.bound < 0 || this.position.x + this.bound > sketch.windowWidth * .99) {
       this.checkHorizontalBounds(sketch);

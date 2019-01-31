@@ -44,6 +44,22 @@ export class ClusteringComponent implements OnInit {
     {
       hashtag: '#fifth',
       numElectrons: 99
+    },
+    {
+      hashtag: '#sixth',
+      numElectrons: 27
+    },
+    {
+      hashtag: '#seventh',
+      numElectrons: 52
+    },
+    {
+      hashtag: '#eigth',
+      numElectrons: 32
+    },
+    {
+      hashtag: '#ninth',
+      numElectrons: 43
     }
   ];
 
@@ -70,7 +86,7 @@ export class ClusteringComponent implements OnInit {
       const framerate = 60;
       const buffer = 400;
 
-      const diameter = width * .05;
+      const diameter = width * .035;
 
       const randomPosition = () => {
         return {
