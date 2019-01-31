@@ -17,12 +17,12 @@ export class ClusteringComponent implements OnInit {
 
   private atoms: Atom[];
 
+  private minSize: number;
+
   minValue: number;
   maxValue: number;
   stepValue: number;
   startingValue: number;
-
-  minSize: number;
 
   private data = [
     {
