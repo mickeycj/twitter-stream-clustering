@@ -1,4 +1,4 @@
-declare var require: any
+declare var require: any;
 
 import { Component, OnInit } from '@angular/core';
 
@@ -84,7 +84,7 @@ export class ClusteringComponent implements OnInit {
         
         this.atoms = this.data.map((datum) => {
           const { x, y } = randomPosition();
-          return new Atom(datum.hashtag, x, y, diameter, datum.numElectrons);
+          return new Atom(datum.hashtag, x, y, diameter, datum.numElectrons, sketch);
         });
       };
 

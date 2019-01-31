@@ -5,8 +5,8 @@ import { Electron } from './electron.model';
 
 export class Shell {
 
-  x: number;
-  y: number;
+  position: any;
+
   diameter: number;
   level: number;
   electronDiameter: number;
@@ -14,8 +14,7 @@ export class Shell {
   electrons: Electron[];
 
   constructor(atom: Atom, level: number, numElectrons: number) {
-    this.x = atom.x;
-    this.y = atom.y;
+    this.position = atom.position;
     this.diameter = atom.diameter + atom.diameter * level / SHELL_RATIO;
     this.level = level;
     this.electronDiameter = atom.diameter / ELECTRON.RATIO;
@@ -31,7 +30,7 @@ export class Shell {
     
     sketch.stroke(COLORS.GRAY);
     sketch.noFill();
-    sketch.ellipse(this.x, this.y, this.diameter);
+    sketch.ellipse(this.position.x, this.position.y, this.diameter);
   }
 
 }

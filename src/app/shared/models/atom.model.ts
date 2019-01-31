@@ -1,23 +1,30 @@
-import { COLORS, ORBITALS } from './constants';
+declare var require: any;
+
+import { COLORS, MAX_VELOCITY, ORBITALS } from './constants';
 
 import { Shell } from './shell.model';
+
+const p5 = require('p5');
 
 export class Atom {
 
   hashtag: string;
 
-  x: number;
-  y: number;
+  position: any;
+  velocity: any;
+
   diameter: number;
 
   numElectrons: number;
   shells: Shell[];
 
-  constructor(hashtag: string, x: number, y: number, diameter: number, numElectrons: number) {
+  constructor(hashtag: string, x: number, y: number, diameter: number, numElectrons: number, sketch: any) {
     this.hashtag = hashtag;
 
-    this.x = x;
-    this.y = y;
+    this.position = sketch.createVector(x, y);
+    this.velocity = p5.Vector.random2D();
+    this.velocity.setMag(MAX_VELOCITY);
+
     this.diameter = diameter;
 
     this.numElectrons = numElectrons;
@@ -57,10 +64,12 @@ export class Atom {
 
     sketch.noStroke();
     sketch.fill(COLORS.GRAY);
-    sketch.ellipse(this.x, this.y, this.diameter);
+    sketch.ellipse(this.position.x, this.position.y, this.diameter);
 
     sketch.fill(COLORS.WHITE);
-    sketch.text(this.hashtag, this.x, this.y, this.diameter, this.diameter / 2);
+    sketch.text(this.hashtag, this.position.x, this.position.y, this.diameter, this.diameter / 2);
+
+    this.position.add(this.velocity);
   }
 
 }

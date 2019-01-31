@@ -3,6 +3,8 @@ export const COLORS = {
   WHITE: '#FFFFFF'
 };
 
+export const MAX_VELOCITY = 0.25;
+
 export const ORBITALS = [
   {
     name: '1s',
