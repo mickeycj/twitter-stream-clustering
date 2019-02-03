@@ -1,6 +1,6 @@
 export const COLORS = {
-  GRAY: '#888888',
-  WHITE: '#FFFFFF'
+  GRAY: '#FFFFFF',
+  WHITE: '#333333'
 };
 
 export const VELOCITY_MULT = 5;

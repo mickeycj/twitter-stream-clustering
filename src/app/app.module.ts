@@ -10,6 +10,7 @@ import { HeaderComponent } from './shared/header/header.component';
 import { ClusteringComponent } from './clustering/clustering.component';
 import { DetailComponent } from './detail/detail.component';
 import { AboutComponent } from './about/about.component';
+import { ParticlesModule } from 'angular-particle';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { AboutComponent } from './about/about.component';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    MaterialModule
+    MaterialModule,
+    ParticlesModule
   ],
   providers: [],
   bootstrap: [AppComponent]

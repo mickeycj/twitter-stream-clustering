@@ -7,4 +7,12 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'Twitter Stream Clustering';
+  myStyle: object = {};
+  myParams: object = {};
+  width: number = 100;
+  height: number = 100;
+
+  ngOnInit() {
+  }
+
 }
