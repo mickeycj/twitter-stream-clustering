@@ -17,12 +17,12 @@ export class ClusteringComponent implements OnInit {
 
   private atoms: Atom[];
 
+  private minSize: number;
+
   minValue: number;
   maxValue: number;
   stepValue: number;
   startingValue: number;
-
-  minSize: number;
 
   private data = [
     {
@@ -31,11 +31,35 @@ export class ClusteringComponent implements OnInit {
     },
     {
       hashtag: '#second',
-      numElectrons: 32
+      numElectrons: 18
     },
     {
       hashtag: '#third',
+      numElectrons: 64
+    },
+    {
+      hashtag: '#fourth',
       numElectrons: 8
+    },
+    {
+      hashtag: '#fifth',
+      numElectrons: 99
+    },
+    {
+      hashtag: '#sixth',
+      numElectrons: 27
+    },
+    {
+      hashtag: '#seventh',
+      numElectrons: 52
+    },
+    {
+      hashtag: '#eigth',
+      numElectrons: 32
+    },
+    {
+      hashtag: '#ninth',
+      numElectrons: 43
     }
   ];
 
@@ -59,11 +83,10 @@ export class ClusteringComponent implements OnInit {
 
       const width = sketch.windowWidth * .99;
       const height = sketch.windowHeight * .8;
-      const background = '#FFFFFF';
       const framerate = 60;
       const buffer = 400;
 
-      const diameter = width * .05;
+      const diameter = width * .035;
 
       const randomPosition = () => {
         return {
@@ -89,7 +112,6 @@ export class ClusteringComponent implements OnInit {
       };
 
       sketch.draw = () => {
-        // sketch.background(background);
         sketch.clear();
 
         this.atoms.filter((atom) => atom.numElectrons >= this.minSize).forEach((atom) => atom.draw(sketch));

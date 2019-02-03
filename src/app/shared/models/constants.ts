@@ -3,7 +3,9 @@ export const COLORS = {
   WHITE: '#333333'
 };
 
-export const MAX_VELOCITY = 0.5;
+export const VELOCITY_MULT = 5;
+export const MOVE_FREQUENCY = 60;
+export const DRAG_RATIO = 0.1;
 
 export const ORBITALS = [
   {
