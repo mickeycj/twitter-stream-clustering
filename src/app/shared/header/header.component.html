@@ -1,4 +1,4 @@
-<mat-toolbar color="primary">
+<!-- <mat-toolbar color="primary">
   <span><a routerLink="/">{{ title }}</a></span>
   <button mat-icon-button [mat-menu-trigger-for]="menu">
     <mat-icon>more_vert</mat-icon>
@@ -7,4 +7,20 @@
 <mat-menu x-position="before" #menu="matMenu">
   <button mat-menu-item routerLink="/home">Home</button>
   <button mat-menu-item routerLink="/about">About</button>
-</mat-menu>
+</mat-menu> -->
+
+<nav class="navbar navbar-expand-sm justify-content-between bg-light fixed-top">
+
+  <a class="navbar-brand mb-0 h1 uppercase" routerLink="/">Twitter Stream Clustering</a>
+  <div class="text-align-right">
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link uppercase margin" routerLink="/home">Home</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link uppercase margin" routerLink="/about">About</a>
+      </li>
+    </ul>
+  </div>
+
+</nav>
