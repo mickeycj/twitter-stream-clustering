@@ -1,12 +1,12 @@
 #sketch-clustering {
-  margin: 16px;
+  margin: -64PX 16px -144px;
   display: flex;
   justify-content: center;
 }
 
 #slider-size {
-  margin-left: 30%;
-  margin-right: 30%;
+  margin: 32px 30% 0;
+  border-color: #7F7FD5;
   display: flex;
   justify-content: center;
   transform: scale(2);
@@ -15,7 +15,6 @@
 .ftco-section-parallax {
   position: relative;
 }
-
 .ftco-section-parallax .parallax-img {
   background-size: cover;
   background-repeat: no-repeat;
@@ -31,12 +30,9 @@
   background: linear-gradient(45deg, #7F7FD5 0%, #91EAE4 100%);
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#448ef6', endColorstr='#af05a9', GradientType=1);
 }
-
 .ftco-section-parallax .heading-section-white h2 {
   font-weight: 400 !important;
 }
-
-
 .ftco-section-parallax {
   position: relative;
 

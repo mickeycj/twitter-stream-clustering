@@ -79,8 +79,8 @@ export class Atom {
     if (this.position.x - this.bound < 0) {
       this.position.x = this.bound;
     }
-    if (this.position.x + this.bound > sketch.windowWidth * .99) {
-      this.position.x = sketch.windowWidth * .99 - this.bound;
+    if (this.position.x + this.bound > sketch.windowWidth * 0.99) {
+      this.position.x = sketch.windowWidth * 0.99 - this.bound;
     }
   }
 
@@ -88,8 +88,8 @@ export class Atom {
     if (this.position.y - this.bound < 0) {
       this.position.y = this.bound;
     }
-    if (this.position.y + this.bound > sketch.windowHeight * .8) {
-      this.position.y = sketch.windowHeight * .8 - this.bound;
+    if (this.position.y + this.bound > sketch.windowHeight * 0.75) {
+      this.position.y = sketch.windowHeight * 0.75 - this.bound;
     }
   }
 
@@ -111,7 +111,7 @@ export class Atom {
       this.velocity.x = -this.velocity.x;
       this.direction.x = -this.direction.x;
     }
-    if (this.position.y - this.bound < 0 || this.position.y + this.bound > sketch.windowHeight * .8) {
+    if (this.position.y - this.bound < 0 || this.position.y + this.bound > sketch.windowHeight * .75) {
       this.checkVerticalBounds(sketch);
       this.velocity.y = -this.velocity.y;
       this.direction.y = -this.direction.y;

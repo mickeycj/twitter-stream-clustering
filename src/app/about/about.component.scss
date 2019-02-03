@@ -1,7 +1,18 @@
+h2 {
+  font-family: Nunito;
+  font-weight: 800;
+  color: white;
+}
+
+p {
+  font-family: Nunito;
+  font-weight: 600;
+  color: white;
+}
+
 .ftco-section-parallax {
   position: relative;
 }
-
 .ftco-section-parallax .parallax-img {
   background-size: cover;
   background-repeat: no-repeat;
@@ -17,12 +28,9 @@
   background: linear-gradient(45deg, #7F7FD5 0%, #91EAE4 100%);
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#448ef6', endColorstr='#af05a9', GradientType=1);
 }
-
 .ftco-section-parallax .heading-section-white h2 {
   font-weight: 400 !important;
 }
-
-
 .ftco-section-parallax {
   position: relative;
 
@@ -40,16 +48,4 @@
       font-weight: 400 !important;
     }
   }
-}
-
-.about {
-  font-family: Nunito;
-  font-weight: 800;
-  color: white;
-}
-
-p {
-  font-family: Nunito;
-  font-weight: 600;
-  color: white;
 }

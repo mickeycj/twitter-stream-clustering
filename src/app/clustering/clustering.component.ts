@@ -81,8 +81,8 @@ export class ClusteringComponent implements OnInit {
   private createCanvas() {
     new p5((sketch: any) => {
 
-      const width = sketch.windowWidth * .99;
-      const height = sketch.windowHeight * .8;
+      const width = sketch.windowWidth * 0.99;
+      const height = sketch.windowHeight * 0.75;
       const framerate = 60;
       const buffer = 400;
 
