@@ -87,6 +87,8 @@ export class ClusteringComponent implements OnInit {
       const buffer = 400;
 
       const diameter = width * .035;
+      const velocity = 5;
+      const moveFrequency = 60;
 
       const randomPosition = () => {
         return {
@@ -115,6 +117,12 @@ export class ClusteringComponent implements OnInit {
         sketch.clear();
 
         this.atoms.filter((atom) => atom.numElectrons >= this.minSize).forEach((atom) => atom.draw(sketch));
+        this.atoms.forEach((atom) => {
+          if (sketch.frameCount % moveFrequency === 0) {
+            atom.velocity = sketch.createVector(velocity * ((Math.random() < 0.5) ? 1 : -1), velocity * ((Math.random() < 0.5) ? 1 : -1));
+          }
+          atom.updatePosition(sketch);
+        });
       };
 
     }, this.sketchId);
