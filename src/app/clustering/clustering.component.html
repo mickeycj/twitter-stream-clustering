@@ -1,0 +1,12 @@
+<section class="ftco-section-parallax">
+  <div class="parallax-img">
+    <div id="sketch-clustering"></div>
+  </div>
+</section>
+
+<mat-slider id="slider-size"
+            class="slider-size"
+            [min]="minValue" [max]="maxValue"
+            [step]="stepValue" [value]="startingValue"
+            (input)="onSliderChanged($event)">
+</mat-slider>

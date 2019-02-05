@@ -6,5 +6,13 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'TwitterStreamClustering';
+  title = 'Twitter Stream Clustering';
+  myStyle: object = {};
+  myParams: object = {};
+  width: number = 100;
+  height: number = 100;
+
+  ngOnInit() {
+  }
+
 }
