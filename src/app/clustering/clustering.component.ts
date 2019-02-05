@@ -55,17 +55,17 @@ export class ClusteringComponent implements OnInit {
       const moveFrequency = 180;
 
       const maxDataIndex = 3000;
-      const maxAtomSize = 117;
-      const updateSize = 25;
+      const maxAtomSize = 117 * 5;
+      const updateSize = 50;
+
+      var xOffset: number;
+      var yOffset: number;
 
       var time = 0;
       var updateTime = true;
 
       var from = 0;
-      var to = 50;
-
-      var xOffset;
-      var yOffset;
+      var to = 100;
 
       sketch.setup = () => {
         sketch.createCanvas(width, height);
