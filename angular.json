@@ -27,10 +27,14 @@
               "src/assets"
             ],
             "styles": [
-              "src/assets/styles.scss"
+              "src/assets/styles.scss",
+              "node_modules/bootstrap/dist/css/bootstrap.min.css"
             ],
             "scripts": [
-              "./node_modules/hammerjs/hammer.min.js"
+              "./node_modules/hammerjs/hammer.min.js",
+              "./node_modules/p5/lib/p5.min.js",
+              "./node_modules/p5/lib/addons/p5.sound.js",
+              "./node_modules/p5/lib/addons/p5.dom.js"
             ]
           },
           "configurations": {
