@@ -58,14 +58,14 @@ export class ClusteringComponent implements OnInit {
       const maxAtomSize = 117 * 2;
       const updateSize = 30;
 
-      var xOffset: number;
-      var yOffset: number;
-
       var time = 0;
       var updateTime = true;
 
       var from = 0;
       var to = 100;
+
+      var xOffset: number;
+      var yOffset: number;
 
       sketch.setup = () => {
         sketch.createCanvas(width, height);
