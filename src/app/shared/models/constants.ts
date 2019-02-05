@@ -1,6 +1,6 @@
 export const COLORS = {
-  GRAY: '#FFFFFF',
-  WHITE: '#333333'
+  WHITE: '#FFFFFF',
+  GRAY: '#333333'
 };
 
 export const DRAG_RATIO = 0.1;

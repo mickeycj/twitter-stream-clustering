@@ -28,7 +28,7 @@ export class Shell {
   draw(sketch: any) {
     this.electrons.forEach((electron) => electron.draw(sketch));
     
-    sketch.stroke(COLORS.GRAY);
+    sketch.stroke(COLORS.WHITE);
     sketch.noFill();
     sketch.ellipse(this.position.x, this.position.y, this.diameter);
   }

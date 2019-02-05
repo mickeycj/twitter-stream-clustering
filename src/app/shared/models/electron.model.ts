@@ -28,7 +28,7 @@ export class Electron {
     const y = this.shellPosition.y + this.shellRadius * sketch.sin(this.angle);
 
     sketch.noStroke();
-    sketch.fill(COLORS.GRAY);
+    sketch.fill(COLORS.WHITE);
     sketch.ellipse(x, y, this.electronDiameter);
 
     this.angle -= ELECTRON.SPEED / this.shellSpeedOffset;

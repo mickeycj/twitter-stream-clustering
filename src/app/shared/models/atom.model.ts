@@ -68,10 +68,11 @@ export class Atom {
     this.shells.forEach((shell) => shell.draw(sketch));
 
     sketch.noStroke();
-    sketch.fill(COLORS.GRAY);
+    sketch.fill(COLORS.WHITE);
     sketch.ellipse(this.position.x, this.position.y, this.diameter);
 
-    // sketch.text('#' + this.hashtag, this.position.x, this.position.y, this.diameter, this.diameter / 2);
+    sketch.fill(COLORS.GRAY)
+    sketch.text('#' + this.hashtag, this.position.x, this.position.y, this.diameter, this.diameter / 2);
   }
 
 }
