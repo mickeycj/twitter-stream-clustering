@@ -93,19 +93,22 @@ export class ClusteringComponent implements OnInit {
             if (this.atoms.length === 0) {
               xOffset = 0.3 * width / response['max_x'];
               yOffset = 0.2 * height / response['max_y'];
-              this.atoms = response['clusters'].map((cluster: any) => {
-                return new Atom(cluster.hashtag, getX(cluster.x), getY(cluster.y), diameter, cluster.size, sketch);
-              });
-            } else {
-              for (let i = 0; i < this.atoms.length; i++) {
-                const atom = this.atoms[i];
-                const cluster = response['clusters'][i];
-                atom.hashtag = cluster.hashtag;
-                atom.numElectrons = cluster.size;
-                atom.velocity = sketch.createVector(getX(cluster.x) - atom.position.x, getY(cluster.y) - atom.position.y);
-                atom.updatePosition();
-              }
+            //   this.atoms = response['clusters'].map((cluster: any) => {
+            //     return new Atom(cluster.hashtag, getX(cluster.x), getY(cluster.y), diameter, cluster.size, sketch);
+            //   });
+            // } else {
+            //   for (let i = 0; i < this.atoms.length; i++) {
+            //     const atom = this.atoms[i];
+            //     const cluster = response['clusters'][i];
+            //     atom.hashtag = cluster.hashtag;
+            //     atom.numElectrons = cluster.size;
+            //     atom.velocity = sketch.createVector(getX(cluster.x) - atom.position.x, getY(cluster.y) - atom.position.y);
+            //     atom.updatePosition();
+            //   }
             }
+            this.atoms = response['clusters'].map((cluster: any) => {
+              return new Atom(cluster.hashtag, getX(cluster.x), getY(cluster.y), diameter, cluster.size, sketch);
+            });
 
             to += updateSize;
             if (to > maxDataIndex) {
