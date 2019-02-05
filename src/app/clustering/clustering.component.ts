@@ -2,6 +2,8 @@ declare var require: any;
 
 import { Component, OnInit } from '@angular/core';
 
+import { ClusteringService } from './../shared/services/clustering.service';
+
 import { Atom } from './../shared/models/atom.model';
 
 const p5 = require('p5');
@@ -24,52 +26,13 @@ export class ClusteringComponent implements OnInit {
   stepValue: number;
   startingValue: number;
 
-  private data = [
-    {
-      hashtag: '#first',
-      numElectrons: 117
-    },
-    {
-      hashtag: '#second',
-      numElectrons: 18
-    },
-    {
-      hashtag: '#third',
-      numElectrons: 64
-    },
-    {
-      hashtag: '#fourth',
-      numElectrons: 8
-    },
-    {
-      hashtag: '#fifth',
-      numElectrons: 99
-    },
-    {
-      hashtag: '#sixth',
-      numElectrons: 27
-    },
-    {
-      hashtag: '#seventh',
-      numElectrons: 52
-    },
-    {
-      hashtag: '#eigth',
-      numElectrons: 32
-    },
-    {
-      hashtag: '#ninth',
-      numElectrons: 43
-    }
-  ];
-
-  constructor() { }
+  constructor(private clustering: ClusteringService) { }
 
   ngOnInit() {
     this.minValue = 1;
-    this.maxValue = 115;
-    this.stepValue = 5;
-    this.startingValue = this.minSize = 25;
+    this.maxValue = 65;
+    this.stepValue = 2;
+    this.startingValue = this.minSize = 5;
 
     this.createCanvas();
   }
@@ -81,21 +44,28 @@ export class ClusteringComponent implements OnInit {
   private createCanvas() {
     new p5((sketch: any) => {
 
+      const getX = (x: number) => width / 2 + x * xOffset;
+      const getY = (y: number) => height / 2 + y * yOffset;
+
       const width = sketch.windowWidth * 0.99;
       const height = sketch.windowHeight * 0.75;
       const framerate = 60;
-      const buffer = 400;
 
       const diameter = width * .035;
-      const velocity = 5;
-      const moveFrequency = 60;
+      const moveFrequency = 180;
 
-      const randomPosition = () => {
-        return {
-          x: Math.random() * (width - buffer) + buffer / 2,
-          y: Math.random() * (height - buffer) + buffer / 2
-        };
-      };
+      const maxDataIndex = 3000;
+      const maxAtomSize = 117;
+      const updateSize = 25;
+
+      var time = 0;
+      var updateTime = true;
+
+      var from = 0;
+      var to = 50;
+
+      var xOffset;
+      var yOffset;
 
       sketch.setup = () => {
         sketch.createCanvas(width, height);
@@ -107,22 +77,50 @@ export class ClusteringComponent implements OnInit {
 
         sketch.textAlign(sketch.CENTER, sketch.CENTER);
         
-        this.atoms = this.data.map((datum) => {
-          const { x, y } = randomPosition();
-          return new Atom(datum.hashtag, x, y, diameter, datum.numElectrons, sketch);
-        });
+        this.atoms = [];
       };
 
       sketch.draw = () => {
         sketch.clear();
 
         this.atoms.filter((atom) => atom.numElectrons >= this.minSize).forEach((atom) => atom.draw(sketch));
-        this.atoms.forEach((atom) => {
-          if (sketch.frameCount % moveFrequency === 0) {
-            atom.velocity = sketch.createVector(velocity * ((Math.random() < 0.5) ? 1 : -1), velocity * ((Math.random() < 0.5) ? 1 : -1));
-          }
-          atom.updatePosition(sketch);
-        });
+        if (time % moveFrequency === 1) {
+          console.log(time);
+          time++;
+          updateTime = false;
+
+          this.clustering.getClusters(from, to).subscribe((response: Response) => {
+            if (this.atoms.length === 0) {
+              xOffset = 0.3 * width / response['max_x'];
+              yOffset = 0.2 * height / response['max_y'];
+              this.atoms = response['clusters'].map((cluster: any) => {
+                return new Atom(cluster.hashtag, getX(cluster.x), getY(cluster.y), diameter, cluster.size, sketch);
+              });
+            } else {
+              for (let i = 0; i < this.atoms.length; i++) {
+                const atom = this.atoms[i];
+                const cluster = response['clusters'][i];
+                atom.hashtag = cluster.hashtag;
+                atom.numElectrons = cluster.size;
+                atom.velocity = sketch.createVector(getX(cluster.x) - atom.position.x, getY(cluster.y) - atom.position.y);
+                atom.updatePosition();
+              }
+            }
+
+            to += updateSize;
+            if (to > maxDataIndex) {
+              from = 0;
+              to = maxAtomSize;
+            } else if (to - from > maxAtomSize) {
+              from = to - maxAtomSize;
+            }
+            updateTime = true;
+          });
+        }
+        // this.atoms.forEach((atom) => atom.updatePosition());
+        if (updateTime) {
+          time++;
+        }
       };
 
     }, this.sketchId);

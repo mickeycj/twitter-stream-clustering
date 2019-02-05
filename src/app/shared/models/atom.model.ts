@@ -19,8 +19,6 @@ export class Atom {
   numElectrons: number;
   shells: Shell[];
 
-  bound: number;
-
   constructor(hashtag: string, x: number, y: number, diameter: number, numElectrons: number, sketch: any) {
     this.hashtag = hashtag;
 
@@ -34,10 +32,6 @@ export class Atom {
     this.getElectronConfiguration(numElectrons).forEach((numElectrons, index) => {
       this.shells.push(new Shell(this, index + 1, numElectrons));
     });
-
-    this.bound = this.shells[this.shells.length - 1].diameter / 2;
-    this.checkHorizontalBounds(sketch);
-    this.checkVerticalBounds(sketch);
   }
 
   getElectronConfiguration(numElectrons: number) {
@@ -65,33 +59,7 @@ export class Atom {
     return configuration;
   }
 
-  checkHorizontalBounds(sketch: any) {
-    if (this.position.x - this.bound < 0) {
-      this.position.x = this.bound;
-    }
-    if (this.position.x + this.bound > sketch.windowWidth * 0.99) {
-      this.position.x = sketch.windowWidth * 0.99 - this.bound;
-    }
-  }
-
-  checkVerticalBounds(sketch: any) {
-    if (this.position.y - this.bound < 0) {
-      this.position.y = this.bound;
-    }
-    if (this.position.y + this.bound > sketch.windowHeight * 0.75) {
-      this.position.y = sketch.windowHeight * 0.75 - this.bound;
-    }
-  }
-
-  updatePosition(sketch: any) {
-    if (this.position.x - this.bound < 0 || this.position.x + this.bound > sketch.windowWidth * .99) {
-      this.checkHorizontalBounds(sketch);
-      this.velocity.x = -this.velocity.x;
-    }
-    if (this.position.y - this.bound < 0 || this.position.y + this.bound > sketch.windowHeight * .75) {
-      this.checkVerticalBounds(sketch);
-      this.velocity.y = -this.velocity.y;
-    }
+  updatePosition() {
     this.position.add(this.velocity);
     this.velocity.mult(1.0 - DRAG_RATIO);
   }
@@ -104,7 +72,7 @@ export class Atom {
     sketch.ellipse(this.position.x, this.position.y, this.diameter);
 
     sketch.fill(COLORS.WHITE);
-    sketch.text(this.hashtag, this.position.x, this.position.y, this.diameter, this.diameter / 2);
+    sketch.text('#' + this.hashtag, this.position.x, this.position.y, this.diameter, this.diameter / 2);
   }
 
 }
