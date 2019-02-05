@@ -55,8 +55,8 @@ export class ClusteringComponent implements OnInit {
       const moveFrequency = 180;
 
       const maxDataIndex = 3000;
-      const maxAtomSize = 117 * 5;
-      const updateSize = 50;
+      const maxAtomSize = 117 * 2;
+      const updateSize = 30;
 
       var xOffset: number;
       var yOffset: number;
