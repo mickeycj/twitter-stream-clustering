@@ -85,7 +85,6 @@ export class ClusteringComponent implements OnInit {
 
         this.atoms.filter((atom) => atom.numElectrons >= this.minSize).forEach((atom) => atom.draw(sketch));
         if (time % moveFrequency === 1) {
-          console.log(time);
           time++;
           updateTime = false;
 
