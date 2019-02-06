@@ -11,13 +11,7 @@ export class ClusteringService {
 
   constructor(private http: HttpClient) { }
 
-  getClusters(from: number, to: number) {
-    return this.http.post(
-      CLUSTERING_URL,
-      {
-        'from_idx': from,
-        'to_idx': to
-      }
-    );
+  getClusters() {
+    return this.http.get(CLUSTERING_URL);
   }
 }

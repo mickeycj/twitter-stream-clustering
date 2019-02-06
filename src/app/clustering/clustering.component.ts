@@ -54,15 +54,8 @@ export class ClusteringComponent implements OnInit {
       const diameter = width * .035;
       const moveFrequency = 180;
 
-      const maxDataIndex = 3000;
-      const maxAtomSize = 117 * 2;
-      const updateSize = 30;
-
       var time = 0;
       var updateTime = true;
-
-      var from = 0;
-      var to = 100;
 
       var xOffset: number;
       var yOffset: number;
@@ -88,7 +81,7 @@ export class ClusteringComponent implements OnInit {
           time++;
           updateTime = false;
 
-          this.clustering.getClusters(from, to).subscribe((response: Response) => {
+          this.clustering.getClusters().subscribe((response: Response) => {
             if (this.atoms.length === 0) {
               xOffset = 0.3 * width / response['max_x'];
               yOffset = 0.2 * height / response['max_y'];
@@ -109,13 +102,6 @@ export class ClusteringComponent implements OnInit {
               return new Atom(cluster.hashtag, getX(cluster.x), getY(cluster.y), diameter, cluster.size, sketch);
             });
 
-            to += updateSize;
-            if (to > maxDataIndex) {
-              from = 0;
-              to = maxAtomSize;
-            } else if (to - from > maxAtomSize) {
-              from = to - maxAtomSize;
-            }
             updateTime = true;
           });
         }
