@@ -51,7 +51,7 @@ export class ClusteringComponent implements OnInit {
       const height = sketch.windowHeight * 0.75;
       const framerate = 60;
 
-      const diameter = width * .035;
+      const diameter = width * .05;
       const moveFrequency = 180;
 
       var time = 0;
