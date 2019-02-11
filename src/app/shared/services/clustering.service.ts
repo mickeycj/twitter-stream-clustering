@@ -14,4 +14,5 @@ export class ClusteringService {
   getClusters() {
     return this.http.get(CLUSTERING_URL);
   }
+  
 }
