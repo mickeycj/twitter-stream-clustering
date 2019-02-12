@@ -84,29 +84,27 @@ export class ClusteringComponent implements OnInit {
 
           this.clustering.getClusters().subscribe((response: Response) => {
             if (this.atoms.length === 0) {
-              xOffset = 0.3 * width / response['max_x'];
-              yOffset = 0.2 * height / response['max_y'];
-            //   this.atoms = response['clusters'].map((cluster: any) => {
-            //     return new Atom(cluster.hashtag, getX(cluster.x), getY(cluster.y), diameter, cluster.size, sketch);
-            //   });
-            // } else {
-            //   for (let i = 0; i < this.atoms.length; i++) {
-            //     const atom = this.atoms[i];
-            //     const cluster = response['clusters'][i];
-            //     atom.hashtag = cluster.hashtag;
-            //     atom.numElectrons = cluster.size;
-            //     atom.velocity = sketch.createVector(getX(cluster.x) - atom.position.x, getY(cluster.y) - atom.position.y);
-            //     atom.updatePosition();
-            //   }
+              xOffset = 0.5 * width / response['max_x'];
+              yOffset = 0.3 * height / response['max_y'];
+              this.atoms = response['clusters'].map((cluster: any) => {
+                return new Atom(cluster['id'], cluster['hashtag'], getX(cluster['x']), getY(cluster['y']), diameter, cluster['size'], sketch);
+              });
+            } else {
+              for (let i = 0, j = 0; i < this.atoms.length && response['clusters'].length > 0; i++) {
+                const atom = this.atoms[i];
+                const cluster = response['clusters'][j];
+                if (cluster && atom.id === cluster['id']) {
+                  atom.hashtag = cluster['hashtag'];
+                  atom.numElectrons = cluster['size'];
+                  atom.updatePosition(sketch.createVector(getX(cluster['x']), getY(cluster['y'])));
+                  j++;
+                }
+              }
             }
-            this.atoms = response['clusters'].map((cluster: any) => {
-              return new Atom(cluster.hashtag, getX(cluster.x), getY(cluster.y), diameter, cluster.size, sketch);
-            });
 
             updateTime = true;
           });
         }
-        // this.atoms.forEach((atom) => atom.updatePosition());
         if (updateTime) {
           time++;
         }

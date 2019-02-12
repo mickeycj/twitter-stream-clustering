@@ -8,22 +8,23 @@ const p5 = require('p5');
 
 export class Atom {
 
+  id: number;
+
   hashtag: string;
 
-  direction: any;
   position: any;
-  velocity: any;
 
   diameter: number;
 
   numElectrons: number;
   shells: Shell[];
 
-  constructor(hashtag: string, x: number, y: number, diameter: number, numElectrons: number, sketch: any) {
+  constructor(id: number, hashtag: string, x: number, y: number, diameter: number, numElectrons: number, sketch: any) {
+    this.id = id;
+
     this.hashtag = hashtag;
 
     this.position = sketch.createVector(x, y);
-    this.velocity = sketch.createVector(0, 0);
 
     this.diameter = diameter;
 
@@ -59,9 +60,12 @@ export class Atom {
     return configuration;
   }
 
-  updatePosition() {
-    this.position.add(this.velocity);
-    this.velocity.mult(1.0 - DRAG_RATIO);
+  updatePosition(position: any) {
+    this.position = position;
+    this.shells.forEach((shell) => {
+      shell.position = position;
+      shell.electrons.forEach((electron) => electron.shellPosition = position);
+    });
   }
 
   draw(sketch: any) {
