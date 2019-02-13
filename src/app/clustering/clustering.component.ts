@@ -84,8 +84,8 @@ export class ClusteringComponent implements OnInit {
 
           this.clustering.getClusters().subscribe((response: Response) => {
             if (this.atoms.length === 0) {
-              xOffset = 0.5 * width / response['max_x'];
-              yOffset = 0.3 * height / response['max_y'];
+              xOffset = 0.6 * width / response['max_x'];
+              yOffset = 0.4 * height / response['max_y'];
               this.atoms = response['clusters'].map((cluster: any) => {
                 return new Atom(cluster['id'], cluster['hashtag'], getX(cluster['x']), getY(cluster['y']), diameter, cluster['size'], sketch);
               });
