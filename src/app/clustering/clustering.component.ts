@@ -102,6 +102,9 @@ export class ClusteringComponent implements OnInit {
               }
             }
 
+            console.log('Response: ' + response)
+            this.clustering.storeClustering(response);
+
             updateTime = true;
           });
         }
