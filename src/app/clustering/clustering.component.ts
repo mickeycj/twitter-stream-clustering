@@ -54,6 +54,8 @@ export class ClusteringComponent implements OnInit {
       const diameter = width * .05;
       const moveFrequency = 180;
 
+      var font: any;
+
       var time = 0;
       var updateTime = true;
 
@@ -68,6 +70,7 @@ export class ClusteringComponent implements OnInit {
         sketch.rectMode(sketch.CENTER);
         sketch.angleMode(sketch.DEGREES);
 
+        sketch.textFont('Nunito');
         sketch.textAlign(sketch.CENTER, sketch.CENTER);
         
         this.atoms = [];
