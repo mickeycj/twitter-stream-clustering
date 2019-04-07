@@ -21,7 +21,6 @@ export class ClusteringService {
   }
 
   storeClustering(clustering: any) {
-    console.log('Stored data: ' + clustering)
     this._clustering.next(clustering);
   }
   
