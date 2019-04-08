@@ -26,7 +26,7 @@ export class ClusteringComponent implements OnInit {
   stepValue: number;
   startingValue: number;
 
-  constructor(private clustering: ClusteringService) { }
+  constructor(private clusteringService: ClusteringService) { }
 
   ngOnInit() {
     this.minValue = 1;
@@ -85,29 +85,29 @@ export class ClusteringComponent implements OnInit {
           time++;
           updateTime = false;
 
-          this.clustering.getClusters().subscribe((response: Response) => {
-            if (this.atoms.length === 0) {
-              xOffset = 0.6 * width / response['max_x'];
-              yOffset = 0.4 * height / response['max_y'];
-              this.atoms = response['clusters'].map((cluster: any) => {
-                return new Atom(cluster['id'], cluster['hashtag'], getX(cluster['x']), getY(cluster['y']), diameter, cluster['size'], sketch);
-              });
-            } else {
-              for (let i = 0, j = 0; i < this.atoms.length && response['clusters'].length > 0; i++) {
-                const atom = this.atoms[i];
-                const cluster = response['clusters'][j];
-                if (cluster && atom.id === cluster['id']) {
-                  atom.hashtag = cluster['hashtag'];
-                  atom.numElectrons = cluster['size'];
-                  atom.updatePosition(sketch.createVector(getX(cluster['x']), getY(cluster['y'])));
-                  j++;
+          this.clusteringService.clustering.subscribe((response: Response) => {
+            if (response['clusters']) {
+              if (this.atoms.length === 0) {
+                xOffset = 0.6 * width / response['max_x'];
+                yOffset = 0.4 * height / response['max_y'];
+                this.atoms = response['clusters'].map((cluster: any) => {
+                  return new Atom(cluster['id'], cluster['hashtag'], getX(cluster['x']), getY(cluster['y']), diameter, cluster['size'], sketch);
+                });
+              } else {
+                for (let i = 0, j = 0; i < this.atoms.length && response['clusters'].length > 0; i++) {
+                  const atom = this.atoms[i];
+                  const cluster = response['clusters'][j];
+                  if (cluster && atom.id === cluster['id']) {
+                    atom.hashtag = cluster['hashtag'];
+                    atom.numElectrons = cluster['size'];
+                    atom.updatePosition(sketch.createVector(getX(cluster['x']), getY(cluster['y'])));
+                    j++;
+                  }
                 }
               }
+
+              updateTime = true;
             }
-
-            this.clustering.storeClustering(response);
-
-            updateTime = true;
           });
         }
         if (updateTime) {

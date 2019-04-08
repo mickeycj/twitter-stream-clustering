@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 
+import { ClusteringService } from './shared/services/clustering.service';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -12,7 +14,14 @@ export class AppComponent {
   width: number = 100;
   height: number = 100;
 
+  constructor(private clusteringService: ClusteringService) { }
+
   ngOnInit() {
+    setInterval(() => {
+      this.clusteringService.getClusters().subscribe((response: Response) => {
+        this.clusteringService.storeClustering(response);
+      })
+    }, 5000);
   }
 
 }
