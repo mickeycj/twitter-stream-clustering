@@ -56,9 +56,6 @@ export class ClusteringComponent implements OnInit {
 
       var font: any;
 
-      var time = 0;
-      var updateTime = true;
-
       var xOffset: number;
       var yOffset: number;
 
@@ -74,6 +71,29 @@ export class ClusteringComponent implements OnInit {
         sketch.textAlign(sketch.CENTER, sketch.CENTER);
         
         this.atoms = [];
+
+        this.clusteringService.clustering.subscribe((response: Response) => {
+          if (response['clusters']) {
+            if (this.atoms.length === 0) {
+              xOffset = 0.6 * width / response['max_x'];
+              yOffset = 0.4 * height / response['max_y'];
+              this.atoms = response['clusters'].map((cluster: any) => {
+                return new Atom(cluster['id'], cluster['hashtag'], getX(cluster['x']), getY(cluster['y']), diameter, cluster['size'], sketch);
+              });
+            } else {
+              for (let i = 0, j = 0; i < this.atoms.length && response['clusters'].length > 0; i++) {
+                const atom = this.atoms[i];
+                const cluster = response['clusters'][j];
+                if (cluster && atom.id === cluster['id']) {
+                  atom.hashtag = cluster['hashtag'];
+                  atom.numElectrons = cluster['size'];
+                  atom.updatePosition(sketch.createVector(getX(cluster['x']), getY(cluster['y'])));
+                  j++;
+                }
+              }
+            }
+          }
+        });
       };
 
       sketch.draw = () => {
@@ -81,38 +101,6 @@ export class ClusteringComponent implements OnInit {
 
         this.atoms.filter((atom) => atom.numElectrons >= this.minSize).forEach((atom) => atom.draw(sketch));
         this.atoms.filter((atom) => atom.numElectrons >= this.minSize).forEach((atom) => atom.text(sketch));
-        if (time % moveFrequency === 1) {
-          time++;
-          updateTime = false;
-
-          this.clusteringService.clustering.subscribe((response: Response) => {
-            if (response['clusters']) {
-              if (this.atoms.length === 0) {
-                xOffset = 0.6 * width / response['max_x'];
-                yOffset = 0.4 * height / response['max_y'];
-                this.atoms = response['clusters'].map((cluster: any) => {
-                  return new Atom(cluster['id'], cluster['hashtag'], getX(cluster['x']), getY(cluster['y']), diameter, cluster['size'], sketch);
-                });
-              } else {
-                for (let i = 0, j = 0; i < this.atoms.length && response['clusters'].length > 0; i++) {
-                  const atom = this.atoms[i];
-                  const cluster = response['clusters'][j];
-                  if (cluster && atom.id === cluster['id']) {
-                    atom.hashtag = cluster['hashtag'];
-                    atom.numElectrons = cluster['size'];
-                    atom.updatePosition(sketch.createVector(getX(cluster['x']), getY(cluster['y'])));
-                    j++;
-                  }
-                }
-              }
-
-              updateTime = true;
-            }
-          });
-        }
-        if (updateTime) {
-          time++;
-        }
       };
 
     }, this.sketchId);
