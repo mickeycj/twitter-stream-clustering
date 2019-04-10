@@ -1,5 +1,5 @@
 #detail {
-    margin: 80px 45px 0;
+    margin: 76px 45px 0;
 }
 .nunito {
     font-family: Nunito;
@@ -9,16 +9,40 @@
     color: black;
 }
 
+.bg-color {
+    background-color: rgb(56, 56, 56);
+}
+
+.size {
+    max-height: 648px;
+}
+.scroll {
+    max-height: 504px;
+    overflow: scroll;
+}
+
+.padding {
+    padding-top: 20px;
+}
+.padding-side {
+    padding-left: 45px;
+    padding-right: 45px;
+}
+
 .item1 {
     grid-area: canvas;
 }
 .item2 {
-    grid-area: stats;
+    grid-area: word-freq;
 }
 .grid-container {
     display: grid;
-    grid-template-areas: 'canvas stats';
+    grid-template-areas: 'canvas word-freq';
     grid-gap: 16px;
+}
+
+.subheader {
+    margin-left: 16px;
 }
 
 .tweet {

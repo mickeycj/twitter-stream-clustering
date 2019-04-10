@@ -4,12 +4,14 @@
   justify-content: center;
 }
 
-#slider-size {
+.mat-slide {
   margin: 32px 30% 0;
-  border-color: #7F7FD5;
   display: flex;
   justify-content: center;
   transform: scale(2);
+  .mat-slider-thumb {
+    background-color: black !important;
+  }
 }
 
 .ftco-section-parallax {
@@ -21,13 +23,13 @@
   background-position: center center;
   position: relative;
   padding: 10em 0;
-  background: #7F7FD5;
-  background: -moz-linear-gradient(45deg, #7F7FD5 0%, #91EAE4 100%);
-  background: -webkit-gradient(left bottom, right top, color-stop(0%, #7F7FD5), color-stop(100%, #91EAE4));
-  background: -webkit-linear-gradient(45deg, #7F7FD5 0%, #91EAE4 100%);
-  background: -o-linear-gradient(45deg, #7F7FD5 0%, #91EAE4 100%);
-  background: -ms-linear-gradient(45deg, #7F7FD5 0%, #91EAE4 100%);
-  background: linear-gradient(45deg, #7F7FD5 0%, #91EAE4 100%);
+  background-color: rgb(56, 56, 56);
+  // background: -moz-linear-gradient(45deg, #7F7FD5 0%, #91EAE4 100%);
+  // background: -webkit-gradient(left bottom, right top, color-stop(0%, #7F7FD5), color-stop(100%, #91EAE4));
+  // background: -webkit-linear-gradient(45deg, #7F7FD5 0%, #91EAE4 100%);
+  // background: -o-linear-gradient(45deg, #7F7FD5 0%, #91EAE4 100%);
+  // background: -ms-linear-gradient(45deg, #7F7FD5 0%, #91EAE4 100%);
+  // background: linear-gradient(45deg, #7F7FD5 0%, #91EAE4 100%);
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#448ef6', endColorstr='#af05a9', GradientType=1);
 }
 .ftco-section-parallax .heading-section-white h2 {

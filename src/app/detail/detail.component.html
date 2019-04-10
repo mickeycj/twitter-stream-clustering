@@ -1,14 +1,14 @@
 <div id="detail" class=grid-container>
-  <div id="sketch-detail"></div>
-  <div class="stats">
-    <mat-card>
+  <div id="sketch-detail" class="padding"></div>
+  <div class="word-freq padding">
+    <mat-card class="bg-color size">
       <mat-card-header>
         <mat-card-title class="nunito">Represented Hashtag: #{{ cluster.hashtag }}</mat-card-title>
         <mat-card-subtitle class="nunito">Cluster {{ cluster.id }}</mat-card-subtitle>
       </mat-card-header>
-      <mat-card-content>
-        <mat-list>
-          <h3 mat-subheader class="nunito">Tweets</h3>
+      <h3 mat-subheader class="nunito subheader">Tweets</h3>
+      <mat-card-content class="scroll">
+        <div>
           <mat-card class="tweet nunito black-font" *ngFor="let tweet of cluster.documents">
             <mat-card-header>
               <div mat-card-avatar class="example-header-image"></div>
@@ -24,8 +24,36 @@
               <mat-icon svgIcon="retweets"></mat-icon>&nbsp;&nbsp;{{ tweet.retweets }} retweets&nbsp;
             </mat-card-footer>
           </mat-card>
-        </mat-list>
+        </div>
       </mat-card-content>
     </mat-card>
   </div>
+</div>
+<div class="padding padding-side">
+  <mat-card class="bg-color size">
+    <mat-card-header>
+      <mat-card-title class="nunito">Represented Hashtag: #{{ cluster.hashtag }}</mat-card-title>
+      <mat-card-subtitle class="nunito">Cluster {{ cluster.id }}</mat-card-subtitle>
+    </mat-card-header>
+    <h3 mat-subheader class="nunito subheader">Tweets</h3>
+    <mat-card-content class="scroll">
+      <div>
+        <mat-card class="tweet nunito black-font" *ngFor="let tweet of cluster.documents">
+          <mat-card-header>
+            <div mat-card-avatar class="example-header-image"></div>
+            <!-- <mat-card-title>@{{ tweet.user }}</mat-card-title> -->
+            <mat-card-title>@Twitter</mat-card-title>
+            <mat-card-subtitle class="nunito black-font">{{ tweet.time }}</mat-card-subtitle>
+          </mat-card-header>
+          <mat-card-content>
+            {{ tweet.text }}
+          </mat-card-content>
+          <mat-card-footer class="stats">
+            <mat-icon svgIcon="likes"></mat-icon>&nbsp;&nbsp;{{ tweet.likes }} likes&nbsp;&nbsp;&nbsp;
+            <mat-icon svgIcon="retweets"></mat-icon>&nbsp;&nbsp;{{ tweet.retweets }} retweets&nbsp;
+          </mat-card-footer>
+        </mat-card>
+      </div>
+    </mat-card-content>
+  </mat-card>
 </div>

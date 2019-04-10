@@ -68,7 +68,7 @@ export class DetailComponent implements OnInit, OnDestroy {
       const width = sketch.windowWidth * 0.4;
       const height = sketch.windowWidth * 0.45;
       const framerate = 60;
-      const gray = '#333333';
+      const gray = '#383838';
       const colors = ['#d29393', '#ffedca', '#90d9ef', '#cf87dd', '#fea172', '#ade1bb', '#fdfe9e', '#f6d6d6'];
 
       const diameter = width * 0.3;
