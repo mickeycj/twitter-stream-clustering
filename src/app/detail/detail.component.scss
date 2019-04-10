@@ -8,6 +8,13 @@
 .black-font {
     color: black;
 }
+.user-size {
+    font-size: 16px;
+    font-weight: 800;
+}
+.date-size {
+    font-size: 12px;
+}
 
 .bg-color {
     background-color: rgb(56, 56, 56);
@@ -33,11 +40,11 @@
     grid-area: canvas;
 }
 .item2 {
-    grid-area: word-freq;
+    grid-area: stats;
 }
 .grid-container {
     display: grid;
-    grid-template-areas: 'canvas word-freq';
+    grid-template-areas: 'canvas stats';
     grid-gap: 16px;
 }
 
@@ -45,18 +52,20 @@
     margin-left: 16px;
 }
 
-.tweet {
-    margin: 16px 8px 16px;
-    background-color: white;
-    border: medium solid #7F7FD5;
-}
-
-.stats {
-    margin: 0 8px 8px;
-}
-
 .example-header-image {
     background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
     background-size: cover;
 }
-  
+.tweet {
+    margin: 16px 8px 16px;
+    background-color: white;
+    border: medium solid black;
+}
+.stats {
+    margin: 0 8px 8px;
+}
+
+.count {
+    margin-top: -32px;
+    font-size: 50px;
+}  

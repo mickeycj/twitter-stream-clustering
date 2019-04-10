@@ -75,7 +75,7 @@ export class ClusteringComponent implements OnInit, OnDestroy {
         sketch.rectMode(sketch.CENTER);
         sketch.angleMode(sketch.DEGREES);
 
-        sketch.textSize(16);
+        sketch.textSize(14);
         sketch.textFont('Nunito');
         sketch.textAlign(sketch.CENTER, sketch.CENTER);
         

@@ -55,7 +55,9 @@ export class DetailComponent implements OnInit, OnDestroy {
       this.clusterId = params.get('id');
       this.clusterSubscription = this.clusteringService.clustering.subscribe((response: Response) => {
         this.cluster = response['clusters'][this.clusterId];
-        this.colorIndex = this.clusterId;
+        if (!this.colorIndex) {
+          this.colorIndex = this.clusterId;
+        }
       })
     });
 

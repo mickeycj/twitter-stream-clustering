@@ -1,6 +1,6 @@
-<div id="detail" class=grid-container>
+<div id="detail" class="grid-container">
   <div id="sketch-detail" class="padding"></div>
-  <div class="word-freq padding">
+  <div class="stats padding">
     <mat-card class="bg-color size">
       <mat-card-header>
         <mat-card-title class="nunito">Represented Hashtag: #{{ cluster.hashtag }}</mat-card-title>
@@ -12,16 +12,15 @@
           <mat-card class="tweet nunito black-font" *ngFor="let tweet of cluster.documents">
             <mat-card-header>
               <div mat-card-avatar class="example-header-image"></div>
-              <!-- <mat-card-title>@{{ tweet.user }}</mat-card-title> -->
-              <mat-card-title>@Twitter</mat-card-title>
-              <mat-card-subtitle class="nunito black-font">{{ tweet.time }}</mat-card-subtitle>
+              <mat-card-title class="user-size">@{{ tweet.user }}</mat-card-title>
+              <mat-card-subtitle class="nunito black-font date-size">{{ tweet.time }}</mat-card-subtitle>
             </mat-card-header>
             <mat-card-content>
               {{ tweet.text }}
             </mat-card-content>
             <mat-card-footer class="stats">
-              <mat-icon svgIcon="likes"></mat-icon>&nbsp;&nbsp;{{ tweet.likes }} likes&nbsp;&nbsp;&nbsp;
-              <mat-icon svgIcon="retweets"></mat-icon>&nbsp;&nbsp;{{ tweet.retweets }} retweets&nbsp;
+              <mat-icon svgIcon="likes"></mat-icon>&nbsp;&nbsp;{{ tweet.likes | number:'1.0' }} likes&nbsp;&nbsp;&nbsp;
+              <mat-icon svgIcon="retweets"></mat-icon>&nbsp;&nbsp;{{ tweet.retweets | number:'1.0' }} retweets&nbsp;
             </mat-card-footer>
           </mat-card>
         </div>
@@ -31,29 +30,22 @@
 </div>
 <div class="padding padding-side">
   <mat-card class="bg-color size">
-    <mat-card-header>
-      <mat-card-title class="nunito">Represented Hashtag: #{{ cluster.hashtag }}</mat-card-title>
-      <mat-card-subtitle class="nunito">Cluster {{ cluster.id }}</mat-card-subtitle>
-    </mat-card-header>
-    <h3 mat-subheader class="nunito subheader">Tweets</h3>
+    <h3 mat-subheader class="nunito subheader">Word Count</h3>
     <mat-card-content class="scroll">
-      <div>
-        <mat-card class="tweet nunito black-font" *ngFor="let tweet of cluster.documents">
-          <mat-card-header>
-            <div mat-card-avatar class="example-header-image"></div>
-            <!-- <mat-card-title>@{{ tweet.user }}</mat-card-title> -->
-            <mat-card-title>@Twitter</mat-card-title>
-            <mat-card-subtitle class="nunito black-font">{{ tweet.time }}</mat-card-subtitle>
-          </mat-card-header>
-          <mat-card-content>
-            {{ tweet.text }}
-          </mat-card-content>
-          <mat-card-footer class="stats">
-            <mat-icon svgIcon="likes"></mat-icon>&nbsp;&nbsp;{{ tweet.likes }} likes&nbsp;&nbsp;&nbsp;
-            <mat-icon svgIcon="retweets"></mat-icon>&nbsp;&nbsp;{{ tweet.retweets }} retweets&nbsp;
-          </mat-card-footer>
-        </mat-card>
-      </div>
+        <mat-grid-list cols="7" rowHeight="100px">
+            <mat-grid-tile [colspan]="2" [rowspan]="1">
+              <h3 mat-subheader class="nunito">Total</h3>
+            </mat-grid-tile>
+            <mat-grid-tile *ngFor="let wordCount of cluster.word_count.slice(0, 5)" [colspan]="1" [rowspan]="1">
+              <h3 mat-subheader class="nunito">{{ wordCount.word }}</h3>
+            </mat-grid-tile>
+            <mat-grid-tile [colspan]="2" [rowspan]="2">
+              <h3 mat-subheader class="nunito count">{{ cluster.word_count.length }}</h3>
+            </mat-grid-tile>
+            <mat-grid-tile *ngFor="let wordCount of cluster.word_count.slice(0, 5)" [colspan]="1" [rowspan]="2">
+                <h3 mat-subheader class="nunito count">{{ wordCount.count }}</h3>
+            </mat-grid-tile>
+          </mat-grid-list>
     </mat-card-content>
   </mat-card>
 </div>
