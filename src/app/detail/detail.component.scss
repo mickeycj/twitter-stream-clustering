@@ -16,6 +16,11 @@
     font-size: 12px;
 }
 
+.mat-divider {
+    border-top-width: 2px;
+    border-top-color: white;
+}
+
 .bg-color {
     background-color: rgb(56, 56, 56);
 }
@@ -24,6 +29,7 @@
     max-height: 648px;
 }
 .scroll {
+    margin-top: 16px;
     max-height: 504px;
     overflow: scroll;
 }
@@ -57,15 +63,21 @@
     background-size: cover;
 }
 .tweet {
-    margin: 16px 8px 16px;
+    margin: 4px 8px 28px;
     background-color: white;
-    border: medium solid black;
 }
 .stats {
     margin: 0 8px 8px;
 }
+.center {
+    text-align: center;
+    padding: 32px 0;
+}
 
+.word-count {
+    margin: 32px 0 0;
+}
 .count {
-    margin-top: -32px;
+    margin: -24px 0;
     font-size: 50px;
-}  
+}
