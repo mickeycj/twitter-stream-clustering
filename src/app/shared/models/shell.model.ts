@@ -29,6 +29,11 @@ export class Shell {
     this.color = color;
   }
 
+  updateColor(color: string) {
+    this.color = color;
+    this.electrons.forEach((electron) => electron.color = color);
+  }
+
   draw(sketch: any) {
     this.electrons.forEach((electron) => electron.draw(sketch));
     

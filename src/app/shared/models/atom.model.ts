@@ -72,6 +72,11 @@ export class Atom {
     });
   }
 
+  updateColor(color: string) {
+    this.color = color;
+    this.shells.forEach((shell) => shell.updateColor(color));
+  }
+
   draw(sketch: any) {
     this.shells.forEach((shell) => shell.draw(sketch));
 

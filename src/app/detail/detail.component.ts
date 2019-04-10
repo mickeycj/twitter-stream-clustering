@@ -26,11 +26,11 @@ export class DetailComponent implements OnInit, OnDestroy {
 
   private atom: Atom;
   
+  private colorIndex: number;
+
   private atomSubscription: Subscription;
   
   private clusterSubscription: Subscription;
-
-  private colorIndex = -1;
 
   cluster: any;
 
@@ -55,7 +55,7 @@ export class DetailComponent implements OnInit, OnDestroy {
       this.clusterId = params.get('id');
       this.clusterSubscription = this.clusteringService.clustering.subscribe((response: Response) => {
         this.cluster = response['clusters'][this.clusterId];
-        this.colorIndex = (this.colorIndex + 1) % 8;
+        this.colorIndex = this.clusterId;
       })
     });
 
@@ -92,8 +92,11 @@ export class DetailComponent implements OnInit, OnDestroy {
               if (!this.atom) {
                 this.atom = new Atom(cluster['id'], cluster['hashtag'], width / 2, height / 2, diameter, cluster['size'], colors[this.colorIndex], sketch);
               } else {
+                this.colorIndex = (this.colorIndex + 1) % 8;
+
                 this.atom.hashtag = cluster['hashtag'];
                 this.atom.numElectrons = cluster['size'];
+                this.atom.updateColor(colors[this.colorIndex]);
               }
             }
           }
