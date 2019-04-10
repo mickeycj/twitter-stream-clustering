@@ -1,6 +1,9 @@
 declare var require: any;
 
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Router } from '@angular/router';
+
+import { Subscription } from 'rxjs';
 
 import { ClusteringService } from './../shared/services/clustering.service';
 
@@ -13,7 +16,7 @@ const p5 = require('p5');
   templateUrl: './clustering.component.html',
   styleUrls: ['./clustering.component.scss']
 })
-export class ClusteringComponent implements OnInit {
+export class ClusteringComponent implements OnInit, OnDestroy {
 
   private sketchId = 'sketch-clustering';
 
@@ -21,12 +24,14 @@ export class ClusteringComponent implements OnInit {
 
   private minSize: number;
 
+  private subscription: Subscription
+
   minValue: number;
   maxValue: number;
   stepValue: number;
   startingValue: number;
 
-  constructor(private clusteringService: ClusteringService) { }
+  constructor(private router: Router, private clusteringService: ClusteringService) { }
 
   ngOnInit() {
     this.minValue = 1;
@@ -47,14 +52,15 @@ export class ClusteringComponent implements OnInit {
       const getX = (x: number) => width / 2 + x * xOffset;
       const getY = (y: number) => height / 2 + y * yOffset;
 
+      const isClicked = (mouseX: number, mouseY: number, xPos: number, yPos: number, radius: number) => {
+        return mouseX >= xPos - radius && mouseX <= xPos + radius && mouseY >= yPos - radius && mouseY <= yPos + radius;
+      };
+
       const width = sketch.windowWidth * 0.99;
       const height = sketch.windowHeight * 0.75;
       const framerate = 60;
 
       const diameter = width * .05;
-      const moveFrequency = 180;
-
-      var font: any;
 
       var xOffset: number;
       var yOffset: number;
@@ -72,7 +78,7 @@ export class ClusteringComponent implements OnInit {
         
         this.atoms = [];
 
-        this.clusteringService.clustering.subscribe((response: Response) => {
+        this.subscription = this.clusteringService.clustering.subscribe((response: Response) => {
           if (response['clusters']) {
             if (this.atoms.length === 0) {
               xOffset = 0.6 * width / response['max_x'];
@@ -103,7 +109,23 @@ export class ClusteringComponent implements OnInit {
         this.atoms.filter((atom) => atom.numElectrons >= this.minSize).forEach((atom) => atom.text(sketch));
       };
 
+      sketch.mouseClicked = () => {
+        const clickedAtom = this.atoms.find((atom) => {
+          return atom.numElectrons >= this.minSize
+              && isClicked(sketch.mouseX, sketch.mouseY, atom.position.x, atom.position.y, atom.diameter / 2);
+        });
+
+        if (clickedAtom) {
+          this.router.navigate(['/detail', clickedAtom.id]);
+          sketch.remove()
+        }
+      };
+
     }, this.sketchId);
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 
 }
