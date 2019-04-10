@@ -17,11 +17,14 @@ export class AppComponent {
   constructor(private clusteringService: ClusteringService) { }
 
   ngOnInit() {
-    setInterval(() => {
-      this.clusteringService.getClusters().subscribe((response: Response) => {
-        this.clusteringService.storeClustering(response);
-      })
-    }, 5000);
+    this.getClusters();
+    setInterval(this.getClusters, 5000);
+  }
+
+  private getClusters() {
+    this.clusteringService.getClusters().subscribe((response: Response) => {
+      this.clusteringService.storeClustering(response);
+    });
   }
 
 }
