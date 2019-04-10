@@ -54,9 +54,9 @@ export class DetailComponent implements OnInit, OnDestroy {
     this.route.paramMap.subscribe((params: Params) => {
       this.clusterId = params.get('id');
       this.clusterSubscription = this.clusteringService.clustering.subscribe((response: Response) => {
-        this.cluster = response['clusters'][this.clusterId];
+        this.cluster = response['clusters'][this.clusterId - 1];
         if (!this.colorIndex) {
-          this.colorIndex = this.clusterId;
+          this.colorIndex = this.clusterId - 1;
         }
       })
     });

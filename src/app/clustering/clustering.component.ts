@@ -87,7 +87,7 @@ export class ClusteringComponent implements OnInit, OnDestroy {
               xOffset = 0.6 * width / response['max_x'];
               yOffset = 0.4 * height / response['max_y'];
               this.atoms = response['clusters'].map((cluster: any) => {
-                return new Atom(cluster['id'], cluster['hashtag'], getX(cluster['x']), getY(cluster['y']), diameter, cluster['size'], colors[cluster['id']], sketch);
+                return new Atom(cluster['id'], cluster['hashtag'], getX(cluster['x']), getY(cluster['y']), diameter, cluster['size'], colors[cluster['id'] - 1], sketch);
               });
             } else {
               for (let i = 0, j = 0; i < this.atoms.length && response['clusters'].length > 0; i++) {
