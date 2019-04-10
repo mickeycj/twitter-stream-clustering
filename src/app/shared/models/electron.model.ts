@@ -13,7 +13,9 @@ export class Electron {
 
   electronDiameter: number;
 
-  constructor(shell: Shell, angle: number, electronDiameter: number) {
+  color: string;
+
+  constructor(shell: Shell, angle: number, electronDiameter: number, color: string) {
     this.shellPosition = shell.position;
     this.shellRadius = shell.diameter / 2;
     this.shellSpeedOffset = shell.level - ELECTRON.SPEED_OFFSET;
@@ -21,6 +23,8 @@ export class Electron {
     this.angle = angle;
 
     this.electronDiameter = electronDiameter;
+
+    this.color = color;
   }
 
   draw(sketch: any) {
@@ -28,7 +32,7 @@ export class Electron {
     const y = this.shellPosition.y + this.shellRadius * sketch.sin(this.angle);
 
     sketch.noStroke();
-    sketch.fill(COLORS.WHITE);
+    sketch.fill(this.color);
     sketch.ellipse(x, y, this.electronDiameter);
 
     this.angle -= ELECTRON.SPEED / this.shellSpeedOffset;

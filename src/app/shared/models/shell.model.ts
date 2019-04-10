@@ -13,7 +13,9 @@ export class Shell {
 
   electrons: Electron[];
 
-  constructor(atom: Atom, level: number, numElectrons: number) {
+  color: string;
+
+  constructor(atom: Atom, level: number, numElectrons: number, color: string) {
     this.position = atom.position;
     this.diameter = atom.diameter + atom.diameter * level / SHELL_RATIO;
     this.level = level;
@@ -21,14 +23,16 @@ export class Shell {
 
     this.electrons = [];
     for (let angle = -90; angle > -450; angle -= 360 / numElectrons) {
-      this.electrons.push(new Electron(this, angle, this.electronDiameter));
+      this.electrons.push(new Electron(this, angle, this.electronDiameter, color));
     }
+
+    this.color = color;
   }
 
   draw(sketch: any) {
     this.electrons.forEach((electron) => electron.draw(sketch));
     
-    sketch.stroke(COLORS.WHITE);
+    sketch.stroke(this.color);
     sketch.noFill();
     sketch.ellipse(this.position.x, this.position.y, this.diameter);
   }

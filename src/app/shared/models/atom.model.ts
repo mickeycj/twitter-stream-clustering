@@ -1,6 +1,6 @@
 declare var require: any;
 
-import { COLORS, DRAG_RATIO, ORBITALS } from './constants';
+import { COLORS, ORBITALS } from './constants';
 
 import { Shell } from './shell.model';
 
@@ -19,7 +19,9 @@ export class Atom {
   numElectrons: number;
   shells: Shell[];
 
-  constructor(id: number, hashtag: string, x: number, y: number, diameter: number, numElectrons: number, sketch: any) {
+  color: string;
+
+  constructor(id: number, hashtag: string, x: number, y: number, diameter: number, numElectrons: number, color: string, sketch: any) {
     this.id = id;
 
     this.hashtag = hashtag;
@@ -31,8 +33,10 @@ export class Atom {
     this.numElectrons = numElectrons;
     this.shells = [];
     this.getElectronConfiguration(numElectrons).forEach((numElectrons, index) => {
-      this.shells.push(new Shell(this, index + 1, numElectrons));
+      this.shells.push(new Shell(this, index + 1, numElectrons, color));
     });
+
+    this.color = color;
   }
 
   getElectronConfiguration(numElectrons: number) {
@@ -72,7 +76,7 @@ export class Atom {
     this.shells.forEach((shell) => shell.draw(sketch));
 
     sketch.noStroke();
-    sketch.fill(COLORS.WHITE);
+    sketch.fill(this.color);
     sketch.ellipse(this.position.x, this.position.y, this.diameter);
   }
 

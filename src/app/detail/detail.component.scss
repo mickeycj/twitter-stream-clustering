@@ -1,3 +1,38 @@
-.hashtag {
-    margin-top: 100px;
+#detail {
+    margin: 80px 45px 0;
 }
+.nunito {
+    font-family: Nunito;
+    font-weight: 800;
+}
+.black-font {
+    color: black;
+}
+
+.item1 {
+    grid-area: canvas;
+}
+.item2 {
+    grid-area: stats;
+}
+.grid-container {
+    display: grid;
+    grid-template-areas: 'canvas stats';
+    grid-gap: 16px;
+}
+
+.tweet {
+    margin: 16px 8px 16px;
+    background-color: white;
+    border: medium solid #7F7FD5;
+}
+
+.stats {
+    margin: 0 8px 8px;
+}
+
+.example-header-image {
+    background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+    background-size: cover;
+}
+  

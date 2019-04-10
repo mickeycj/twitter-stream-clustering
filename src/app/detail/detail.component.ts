@@ -1,9 +1,17 @@
+declare var require: any;
+
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
+import { DomSanitizer } from '@angular/platform-browser';
+import { MatIconRegistry } from '@angular/material';
 
 import { Subscription } from 'rxjs';
 
 import { ClusteringService } from '../shared/services/clustering.service';
+
+import { Atom } from './../shared/models/atom.model';
+
+const p5 = require('p5');
 
 @Component({
   selector: 'app-detail',
@@ -12,24 +20,100 @@ import { ClusteringService } from '../shared/services/clustering.service';
 })
 export class DetailComponent implements OnInit, OnDestroy {
 
-  private subscription: Subscription;
+  private sketchId = 'sketch-detail';
+
+  private clusterId: number;
+
+  private atom: Atom;
+  
+  private atomSubscription: Subscription;
+  
+  private clusterSubscription: Subscription;
+
+  private colorIndex = -1;
 
   cluster: any;
 
-  constructor(private route: ActivatedRoute, private clusteringService: ClusteringService) { }
+  constructor(
+    private iconRegistry: MatIconRegistry,
+    private sanitizer: DomSanitizer,
+    private route: ActivatedRoute,
+    private clusteringService: ClusteringService
+  ) {
+    this.iconRegistry.addSvgIcon(
+      'likes',
+      this.sanitizer.bypassSecurityTrustResourceUrl('./assets/icons/like.svg')
+    );
+    this.iconRegistry.addSvgIcon(
+      'retweets',
+      this.sanitizer.bypassSecurityTrustResourceUrl('./assets/icons/retweet.svg')
+    );
+  }
 
   ngOnInit() {
     this.route.paramMap.subscribe((params: Params) => {
-      const cluster_id = params.get('id');
-      this.subscription = this.clusteringService.clustering.subscribe((response: Response) => {
-        this.cluster = response['clusters'][cluster_id];
-        console.log(this.cluster['hashtag']);
+      this.clusterId = params.get('id');
+      this.clusterSubscription = this.clusteringService.clustering.subscribe((response: Response) => {
+        this.cluster = response['clusters'][this.clusterId];
+        this.colorIndex = (this.colorIndex + 1) % 8;
       })
     });
+
+    this.createCanvas();
+  }
+
+  private createCanvas() {
+    new p5((sketch: any) => {
+      
+      const width = sketch.windowWidth * 0.4;
+      const height = sketch.windowWidth * 0.45;
+      const framerate = 60;
+      const gray = '#333333';
+      const colors = ['#d29393', '#ffedca', '#90d9ef', '#cf87dd', '#fea172', '#ade1bb', '#fdfe9e', '#f6d6d6'];
+
+      const diameter = width * 0.3;
+
+      sketch.setup = () => {
+        sketch.createCanvas(width, height);
+        sketch.frameRate(framerate);
+        
+        sketch.ellipseMode(sketch.CENTER);
+        sketch.rectMode(sketch.CENTER);
+        sketch.angleMode(sketch.DEGREES);
+
+        sketch.textSize(24);
+        sketch.textFont('Nunito');
+        sketch.textAlign(sketch.CENTER, sketch.CENTER);
+
+        this.atomSubscription = this.clusteringService.clustering.subscribe((response: Response) => {
+          if (response['clusters']) {
+            const cluster = response['clusters'][this.clusterId];
+            if (cluster) {
+              if (!this.atom) {
+                this.atom = new Atom(cluster['id'], cluster['hashtag'], width / 2, height / 2, diameter, cluster['size'], colors[this.colorIndex], sketch);
+              } else {
+                this.atom.hashtag = cluster['hashtag'];
+                this.atom.numElectrons = cluster['size'];
+              }
+            }
+          }
+        });
+      };
+
+      sketch.draw = () => {
+        sketch.background(gray);
+
+        if (this.atom) {
+          this.atom.draw(sketch);
+          this.atom.text(sketch);
+        }
+      };
+    }, this.sketchId);
   }
 
   ngOnDestroy() {
-    this.subscription.unsubscribe();
+    this.atomSubscription.unsubscribe();
+    this.clusterSubscription.unsubscribe();
   }
 
 }

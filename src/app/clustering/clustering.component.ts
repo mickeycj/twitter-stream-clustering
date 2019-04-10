@@ -60,7 +60,9 @@ export class ClusteringComponent implements OnInit, OnDestroy {
       const height = sketch.windowHeight * 0.75;
       const framerate = 60;
 
-      const diameter = width * .05;
+      const colors = ['#d29393', '#ffedca', '#90d9ef', '#cf87dd', '#fea172', '#ade1bb', '#fdfe9e', '#f6d6d6'];
+
+      const diameter = width * 0.075;
 
       var xOffset: number;
       var yOffset: number;
@@ -73,6 +75,7 @@ export class ClusteringComponent implements OnInit, OnDestroy {
         sketch.rectMode(sketch.CENTER);
         sketch.angleMode(sketch.DEGREES);
 
+        sketch.textSize(16);
         sketch.textFont('Nunito');
         sketch.textAlign(sketch.CENTER, sketch.CENTER);
         
@@ -84,7 +87,7 @@ export class ClusteringComponent implements OnInit, OnDestroy {
               xOffset = 0.6 * width / response['max_x'];
               yOffset = 0.4 * height / response['max_y'];
               this.atoms = response['clusters'].map((cluster: any) => {
-                return new Atom(cluster['id'], cluster['hashtag'], getX(cluster['x']), getY(cluster['y']), diameter, cluster['size'], sketch);
+                return new Atom(cluster['id'], cluster['hashtag'], getX(cluster['x']), getY(cluster['y']), diameter, cluster['size'], colors[cluster['id']], sketch);
               });
             } else {
               for (let i = 0, j = 0; i < this.atoms.length && response['clusters'].length > 0; i++) {
