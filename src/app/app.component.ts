@@ -18,7 +18,7 @@ export class AppComponent {
 
   ngOnInit() {
     this.getClusters();
-    setInterval(this.getClusters, 5000);
+    setInterval(() => this.getClusters(), 5000);
   }
 
   private getClusters() {
