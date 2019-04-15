@@ -1,14 +1,14 @@
 <div id="detail" class="grid-container">
   <div id="sketch-detail" class="padding"></div>
   <div class="stats padding">
-    <mat-card class="bg-color size">
+    <mat-card class="bg-color" [style.height.px]="heightLarge">
       <mat-card-header>
         <mat-card-title class="nunito">Represented Hashtag: #{{ cluster.hashtag }}</mat-card-title>
         <mat-card-subtitle class="nunito">Cluster {{ cluster.id }}</mat-card-subtitle>
       </mat-card-header>
       <h3 mat-subheader class="nunito subheader margin-bottom">Tweets</h3>
       <mat-divider class="mat-divider tweets-divider"></mat-divider>
-      <mat-card-content class="scroll">
+      <mat-card-content class="scroll" [style.height.px]="heightSmall">
         <div>
           <mat-card class="tweet nunito black-font" *ngFor="let tweet of cluster.documents">
             <mat-card-header>

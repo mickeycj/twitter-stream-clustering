@@ -34,6 +34,9 @@ export class DetailComponent implements OnInit, OnDestroy {
 
   cluster: any;
 
+  heightLarge: number;
+  heightSmall: number;
+
   constructor(
     private iconRegistry: MatIconRegistry,
     private sanitizer: DomSanitizer,
@@ -76,6 +79,9 @@ export class DetailComponent implements OnInit, OnDestroy {
       const diameter = width * 0.3;
 
       sketch.setup = () => {
+        this.heightLarge = height;
+        this.heightSmall = this.heightLarge - 148;
+
         sketch.createCanvas(width, height);
         sketch.frameRate(framerate);
         
