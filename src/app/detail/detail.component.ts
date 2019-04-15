@@ -116,7 +116,6 @@ export class DetailComponent implements OnInit, OnDestroy {
 
         if (this.atom) {
           this.atom.draw(sketch);
-          this.atom.text(sketch);
         }
       };
     }, this.sketchId);

@@ -109,7 +109,6 @@ export class ClusteringComponent implements OnInit, OnDestroy {
         sketch.clear();
 
         this.atoms.filter((atom) => atom.numElectrons >= this.minSize).forEach((atom) => atom.draw(sketch));
-        this.atoms.filter((atom) => atom.numElectrons >= this.minSize).forEach((atom) => atom.text(sketch));
       };
 
       sketch.mouseClicked = () => {
