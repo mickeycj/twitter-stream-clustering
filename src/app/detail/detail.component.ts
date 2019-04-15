@@ -89,7 +89,7 @@ export class DetailComponent implements OnInit, OnDestroy {
 
         this.atomSubscription = this.clusteringService.clustering.subscribe((response: Response) => {
           if (response['clusters']) {
-            const cluster = response['clusters'][this.clusterId];
+            const cluster = response['clusters'][this.clusterId - 1];
             if (cluster) {
               if (!this.atom) {
                 this.atom = new Atom(cluster['id'], cluster['hashtag'], width / 2, height / 2, diameter, cluster['size'], colors[this.colorIndex], sketch);
