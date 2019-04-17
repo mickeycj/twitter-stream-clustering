@@ -4,8 +4,6 @@ import { COLORS, ORBITALS } from './constants';
 
 import { Shell } from './shell.model';
 
-const p5 = require('p5');
-
 export class Atom {
 
   id: number;
@@ -30,13 +28,9 @@ export class Atom {
 
     this.diameter = diameter;
 
-    this.numElectrons = numElectrons;
-    this.shells = [];
-    this.getElectronConfiguration(numElectrons).forEach((numElectrons, index) => {
-      this.shells.push(new Shell(this, index + 1, numElectrons, color));
-    });
-
     this.color = color;
+    
+    this.updateNumElectrons(numElectrons);
   }
 
   getElectronConfiguration(numElectrons: number) {
@@ -62,6 +56,16 @@ export class Atom {
     });
 
     return configuration;
+  }
+
+  updateNumElectrons(numElectrons: number) {
+    if (!this.numElectrons || this.numElectrons !== numElectrons) {
+      this.numElectrons = numElectrons;
+      this.shells = [];
+      this.getElectronConfiguration(numElectrons).forEach((numElectrons, index) => {
+        this.shells.push(new Shell(this, index + 1, numElectrons, this.color));
+      });
+    }
   }
 
   updatePosition(position: any) {

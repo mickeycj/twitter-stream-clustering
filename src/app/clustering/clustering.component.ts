@@ -83,9 +83,11 @@ export class ClusteringComponent implements OnInit, OnDestroy {
 
         this.subscription = this.clusteringService.clustering.subscribe((response: Response) => {
           if (response['clusters']) {
+            if (response['isInit'] || this.atoms.length === 0) {
+              xOffset = 0.85 * width / response['maxX'];
+              yOffset = 0.5 * height / response['maxY'];
+            }
             if (this.atoms.length === 0) {
-              xOffset = 0.6 * width / response['max_x'];
-              yOffset = 0.4 * height / response['max_y'];
               this.atoms = response['clusters'].map((cluster: any) => {
                 return new Atom(cluster['id'], cluster['hashtag'], getX(cluster['x']), getY(cluster['y']), diameter, cluster['size'], colors[cluster['id'] - 1], sketch);
               });
@@ -95,7 +97,7 @@ export class ClusteringComponent implements OnInit, OnDestroy {
                 const cluster = response['clusters'][j];
                 if (cluster && atom.id === cluster['id']) {
                   atom.hashtag = cluster['hashtag'];
-                  atom.numElectrons = cluster['size'];
+                  atom.updateNumElectrons(cluster['size']);
                   atom.updatePosition(sketch.createVector(getX(cluster['x']), getY(cluster['y'])));
                   j++;
                 }

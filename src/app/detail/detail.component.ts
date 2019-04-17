@@ -103,7 +103,7 @@ export class DetailComponent implements OnInit, OnDestroy {
                 this.colorIndex = (this.colorIndex + 1) % 8;
 
                 this.atom.hashtag = cluster['hashtag'];
-                this.atom.numElectrons = cluster['size'];
+                this.atom.updateNumElectrons(cluster['size']);
                 this.atom.updateColor(colors[this.colorIndex]);
               }
             }
