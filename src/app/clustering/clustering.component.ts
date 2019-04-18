@@ -60,9 +60,9 @@ export class ClusteringComponent implements OnInit, OnDestroy {
       const height = sketch.windowHeight * 0.75;
       const framerate = 60;
 
-      const colors = ['#d29393', '#ffedca', '#90d9ef', '#cf87dd', '#fea172', '#ade1bb', '#fdfe9e', '#f6d6d6'];
+      const colors = ['#94525e', '#6f5e5b', '#403f69', '#a4ae9e', '#b79147', '#b34f3d', '#6b81a9', '#ab83ae'];
 
-      const diameter = width * 0.075;
+      const diameter = width * 0.1;
 
       var xOffset: number;
       var yOffset: number;
@@ -70,11 +70,9 @@ export class ClusteringComponent implements OnInit, OnDestroy {
       sketch.setup = () => {
         sketch.createCanvas(width, height);
         sketch.frameRate(framerate);
-
         sketch.ellipseMode(sketch.CENTER);
         sketch.rectMode(sketch.CENTER);
         sketch.angleMode(sketch.DEGREES);
-
         sketch.textSize(14);
         sketch.textFont('Nunito');
         sketch.textAlign(sketch.CENTER, sketch.CENTER);

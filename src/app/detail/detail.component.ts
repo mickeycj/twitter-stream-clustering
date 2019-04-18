@@ -74,8 +74,8 @@ export class DetailComponent implements OnInit, OnDestroy {
       const height = sketch.windowWidth * 0.45;
       const framerate = 60;
       const gray = '#383838';
-      const colors = ['#d29393', '#ffedca', '#90d9ef', '#cf87dd', '#fea172', '#ade1bb', '#fdfe9e', '#f6d6d6'];
-
+      const brown = '#D4CECD'
+      const colors = ['#94525e', '#6f5e5b', '#403f69', '#a4ae9e', '#b79147', '#b34f3d', '#6b81a9', '#ab83ae'];
       const diameter = width * 0.3;
 
       sketch.setup = () => {
@@ -89,7 +89,7 @@ export class DetailComponent implements OnInit, OnDestroy {
         sketch.rectMode(sketch.CENTER);
         sketch.angleMode(sketch.DEGREES);
 
-        sketch.textSize(24);
+        sketch.textSize(20);
         sketch.textFont('Nunito');
         sketch.textAlign(sketch.CENTER, sketch.CENTER);
 
@@ -112,7 +112,7 @@ export class DetailComponent implements OnInit, OnDestroy {
       };
 
       sketch.draw = () => {
-        sketch.background(gray);
+        sketch.background(brown);
 
         if (this.atom) {
           this.atom.draw(sketch);

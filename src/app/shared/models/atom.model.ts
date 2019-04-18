@@ -84,7 +84,7 @@ export class Atom {
     sketch.fill(this.color);
     sketch.ellipse(this.position.x, this.position.y, this.diameter);
 
-    sketch.fill(COLORS.GRAY)
+    sketch.fill(COLORS.WHITE)
     sketch.text('#' + this.hashtag, this.position.x, this.position.y, this.diameter, this.diameter / 2);
   }
 
