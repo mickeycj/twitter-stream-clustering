@@ -1,11 +1,38 @@
 .uppercase {
   text-transform: uppercase;
-  margin: 0 75px 15px 30px;
-  color: white;
+  margin: 5px 75px 15px 30px;
+  color: black;
   font-family: Nunito;
   font-weight: 800;
 }
 
 .margin {
-  margin: 10px 30px 10px 0;
+  margin: 5px 30px 10px 0;
 }
+
+.font-color {
+  color: black;
+}
+
+
+.topnav-centered  {
+  float: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.home-line {
+  border-bottom: 5px solid #b2866a;
+}
+
+.header-line {
+  border-bottom: 5px solid #a682a6;
+}
+
+.about-line {
+  border-bottom: 5px solid #83a561;
+}
+
+

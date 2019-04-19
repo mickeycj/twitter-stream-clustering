@@ -1,13 +1,32 @@
 #detail {
-    margin: 76px 45px 0;
+    margin: 0px 35px 0;
 }
 .nunito {
     font-family: Nunito;
     font-weight: 800;
 }
+
+.nunito-word {
+    font-family: Nunito;
+    font-weight: 600;
+}
+
+.sub-nunito {
+    font-family: Nunito;
+}
+
+.card-header-color {
+    background-color: rgba($color: #6F5E5B, $alpha: 0.3);
+}
+
+.margin {
+    margin-top: 0.4cm;
+}
+
 .black-font {
     color: black;
 }
+
 .user-size {
     font-size: 16px;
     font-weight: 800;
@@ -19,10 +38,6 @@
 .mat-divider {
     border-top-width: 2px;
     border-top-color: white;
-}
-
-.bg-color {
-    background-color: rgb(56, 56, 56);
 }
 
 .scroll {
@@ -75,5 +90,15 @@
 }
 .count {
     margin: -24px 0;
-    font-size: 50px;
+    font-size: 30px;
+}
+
+.margin-top {
+    margin-top: 30px;
+    margin-bottom: 10px;
+}
+
+.margin-left {
+    margin-left: 150px;
+    width: 200px;
 }
