@@ -82,19 +82,20 @@ export class ClusteringComponent implements OnInit, OnDestroy {
         this.atoms = [];
 
         this.subscription = this.clusteringService.clustering.subscribe((response: Response) => {
-          if (response['clusters']) {
+          const clusters = response['clusters'];
+          if (clusters) {
             if (response['isInit'] || this.atoms.length === 0) {
-              xOffset = 0.85 * width / response['maxX'];
-              yOffset = 0.5 * height / response['maxY'];
+              xOffset = 0.35 * width / response['maxX'];
+              yOffset = 0.3 * height / response['maxY'];
             }
             if (this.atoms.length === 0) {
-              this.atoms = response['clusters'].map((cluster: any) => {
+              this.atoms = clusters.map((cluster: any) => {
                 return new Atom(cluster['id'], cluster['hashtag'], getX(cluster['x']), getY(cluster['y']), diameter, cluster['size'], colors[cluster['id'] - 1], sketch);
               });
             } else {
-              for (let i = 0, j = 0; i < this.atoms.length && response['clusters'].length > 0; i++) {
+              for (let i = 0, j = 0; i < this.atoms.length && clusters.length > 0; i++) {
                 const atom = this.atoms[i];
-                const cluster = response['clusters'][j];
+                const cluster = clusters[j];
                 if (cluster && atom.id === cluster['id']) {
                   atom.hashtag = cluster['hashtag'];
                   atom.updateNumElectrons(cluster['size']);
