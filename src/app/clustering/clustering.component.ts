@@ -85,7 +85,7 @@ export class ClusteringComponent implements OnInit, OnDestroy {
           const clusters = response['clusters'];
           if (clusters) {
             if (response['isInit'] || this.atoms.length === 0) {
-              xOffset = 0.35 * width / response['maxX'];
+              xOffset = 0.4 * width / response['maxX'];
               yOffset = 0.3 * height / response['maxY'];
             }
             if (this.atoms.length === 0) {
