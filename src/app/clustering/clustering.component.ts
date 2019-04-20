@@ -62,7 +62,7 @@ export class ClusteringComponent implements OnInit, OnDestroy {
 
       const colors = ['#94525e', '#6f5e5b', '#403f69', '#a4ae9e', '#b79147', '#b34f3d', '#6b81a9', '#ab83ae'];
 
-      const diameter = width * 0.1;
+      const diameter = width * 0.075;
 
       var xOffset: number;
       var yOffset: number;
