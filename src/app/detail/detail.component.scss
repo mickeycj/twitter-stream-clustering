@@ -102,3 +102,16 @@
     margin-left: 150px;
     width: 200px;
 }
+
+.bg-project {
+    background-image: no-repeat center center fixed;
+    -moz-background-size: cover;
+    -webkit-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    width: 100%;
+    min-width: 100%;
+    max-width: 100%;
+    min-height: 100%;
+    max-height: 100%;
+  }
