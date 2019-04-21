@@ -25,7 +25,10 @@ p {
 }
 
 .bg-project {
-  background-image: no-repeat center center fixed;
+  background-image: url(/assets/images/bg-project-3.png);
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
   -moz-background-size: cover;
   -webkit-background-size: cover;
   -o-background-size: cover;

@@ -1,5 +1,8 @@
 .bg-project {
-  background-image: no-repeat center center fixed;
+  background-image: url(/assets/images/bg-project-3.png);
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
   -moz-background-size: cover;
   -webkit-background-size: cover;
   -o-background-size: cover;
@@ -28,12 +31,11 @@
   height: auto;
   top: 0;
   left: 0;
-	background-image: linear-gradient(to right top, #fefedf, #fff5de, #ffeee7, #ffeaf4, #fbeaff);
 }
 
-
 .mat-slide {
-  margin: 0px 30%;
+  margin: -64px 30% 0;
+  padding-bottom: 64px;
   display: flex;
   justify-content: center;
   transform: scale(2);
