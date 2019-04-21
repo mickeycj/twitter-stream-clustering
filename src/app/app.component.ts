@@ -18,12 +18,12 @@ export class AppComponent {
 
   ngOnInit() {
     this.getClusters();
-    setInterval(() => this.getClusters(), 5000);
   }
 
   private getClusters() {
     this.clusteringService.getClusters().subscribe((response: Response) => {
       this.clusteringService.storeClustering(response);
+      setTimeout(() => this.getClusters(), 3000);
     });
   }
 
