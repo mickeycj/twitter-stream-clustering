@@ -88,14 +88,14 @@ export class ClusteringComponent implements OnInit, OnDestroy {
             }
             if (this.atoms.length === 0 || this.atoms.length != clusters.length) {
               this.atoms = clusters.map((cluster: any) => {
-                return new Atom(cluster['id'], cluster['hashtag'], getX(cluster['x']), getY(cluster['y']), diameter, cluster['size'], colors[cluster['id'] - 1], sketch);
+                return new Atom(cluster['id'], '#' + cluster['hashtags'][0], getX(cluster['x']), getY(cluster['y']), diameter, cluster['size'], colors[cluster['id'] - 1], sketch);
               });
             } else {
               for (let i = 0, j = 0; i < this.atoms.length && clusters.length > 0; i++) {
                 const atom = this.atoms[i];
                 const cluster = clusters[j];
                 if (cluster && atom.id === cluster['id']) {
-                  atom.hashtag = cluster['hashtag'];
+                  atom.hashtag = '#' + cluster['hashtags'][0];
                   atom.updateNumElectrons(cluster['size']);
                   atom.updatePosition(sketch.createVector(getX(cluster['x']), getY(cluster['y'])));
                   j++;
