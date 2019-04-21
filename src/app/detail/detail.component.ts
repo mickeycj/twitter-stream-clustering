@@ -27,12 +27,13 @@ export class DetailComponent implements OnInit, OnDestroy {
   private atom: Atom;
   
   private colorIndex: number;
-
-  private atomSubscription: Subscription;
   
-  private clusterSubscription: Subscription;
+  private update: boolean
+  
+  private subscription: Subscription;
 
   cluster: any;
+
 
   heightLarge: number;
   heightSmall: number;
@@ -56,11 +57,12 @@ export class DetailComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.route.paramMap.subscribe((params: Params) => {
       this.clusterId = params.get('id');
-      this.clusterSubscription = this.clusteringService.clustering.subscribe((response: Response) => {
+      this.subscription = this.clusteringService.clustering.subscribe((response: Response) => {
         this.cluster = response['clusters'][this.clusterId - 1];
         if (!this.colorIndex) {
           this.colorIndex = this.clusterId - 1;
         }
+        this.update = true;
       })
     });
 
@@ -93,26 +95,23 @@ export class DetailComponent implements OnInit, OnDestroy {
         sketch.textFont('Nunito');
         sketch.textAlign(sketch.CENTER, sketch.CENTER);
 
-        this.atomSubscription = this.clusteringService.clustering.subscribe((response: Response) => {
-          if (response['clusters']) {
-            const cluster = response['clusters'][this.clusterId - 1];
-            if (cluster) {
-              if (!this.atom) {
-                this.atom = new Atom(cluster['id'], cluster['hashtag'], width / 2, height / 2, diameter, cluster['size'], colors[this.colorIndex], sketch);
-              } else {
-                this.colorIndex = (this.colorIndex + 1) % 8;
-
-                this.atom.hashtag = cluster['hashtag'];
-                this.atom.updateNumElectrons(cluster['size']);
-                this.atom.updateColor(colors[this.colorIndex]);
-              }
-            }
-          }
-        });
+        this.atom = new Atom(this.cluster['id'], this.cluster['hashtag'], width / 2, height / 2, diameter, this.cluster['size'], colors[this.colorIndex], sketch);
+        
+        this.update = false
       };
 
       sketch.draw = () => {
         sketch.background(brown);
+
+        if (this.update) {
+          this.colorIndex = (this.colorIndex + 1) % 8;
+
+          this.atom.hashtag = this.cluster['hashtag'];
+          this.atom.updateNumElectrons(this.cluster['size']);
+          this.atom.updateColor(colors[this.colorIndex]); 
+
+          this.update = false
+        }
 
         if (this.atom) {
           this.atom.draw(sketch);
@@ -122,8 +121,7 @@ export class DetailComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.atomSubscription.unsubscribe();
-    this.clusterSubscription.unsubscribe();
+    this.subscription.unsubscribe();
   }
 
 }
