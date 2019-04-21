@@ -1,5 +1,3 @@
-declare var require: any;
-
 import { COLORS, ORBITALS } from './constants';
 
 import { Shell } from './shell.model';
