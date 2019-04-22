@@ -1,51 +1,41 @@
 h2 {
   font-family: Nunito;
   font-weight: 800;
-  color: white;
+  color: black;
 }
 
 p {
   font-family: Nunito;
   font-weight: 600;
-  color: white;
+  color: black;
 }
 
-.ftco-section-parallax {
-  position: relative;
+.bg {
+	min-height: 100%;
+  min-width: 1024px;
+  width: 100%;
+  height: 800px;
+  top: 0;
+  left: 0;
 }
-.ftco-section-parallax .parallax-img {
-  background-size: cover;
-  background-repeat: no-repeat;
+
+.margin-top {
+  vertical-align: middle;
+  padding-top: 100px;
+}
+
+.bg-project {
+  background-image: url(/assets/images/bg-project-3.png);
   background-position: center center;
-  position: relative;
-  padding: 10em 0;
-  background: #7F7FD5;
-  background: -moz-linear-gradient(45deg, #7F7FD5 0%, #91EAE4 100%);
-  background: -webkit-gradient(left bottom, right top, color-stop(0%, #7F7FD5), color-stop(100%, #91EAE4));
-  background: -webkit-linear-gradient(45deg, #7F7FD5 0%, #91EAE4 100%);
-  background: -o-linear-gradient(45deg, #7F7FD5 0%, #91EAE4 100%);
-  background: -ms-linear-gradient(45deg, #7F7FD5 0%, #91EAE4 100%);
-  background: linear-gradient(45deg, #7F7FD5 0%, #91EAE4 100%);
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#448ef6', endColorstr='#af05a9', GradientType=1);
-}
-.ftco-section-parallax .heading-section-white h2 {
-  font-weight: 400 !important;
-}
-.ftco-section-parallax {
-  position: relative;
-
-  .parallax-img {
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center center;
-    position: relative;
-    padding: 10em 0;
-
-  }
-
-  .heading-section-white {
-    h2 {
-      font-weight: 400 !important;
-    }
-  }
+  background-repeat: no-repeat;
+  background-size: cover;
+  -moz-background-size: cover;
+  -webkit-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  width: 100%;
+  min-width: 100%;
+  max-width: 100%;
+  min-height: 100%;
+  max-height: 100%;
 }

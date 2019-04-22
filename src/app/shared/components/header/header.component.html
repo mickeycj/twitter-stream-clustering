@@ -9,16 +9,20 @@
   <button mat-menu-item routerLink="/about">About</button>
 </mat-menu> -->
 
-<nav class="navbar navbar-expand-sm justify-content-between bg-light fixed-top">
-  <a class="navbar-brand mb-0 h1 uppercase" routerLink="/">{{ title }}</a>
-  <div class="text-align-right">
-    <ul class="navbar-nav">
-      <li class="nav-item">
-        <a class="nav-link uppercase margin" routerLink="/home">Home</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link uppercase margin" routerLink="/about">About</a>
-      </li>
-    </ul>
-  </div>
-</nav>
+  
+  <nav class="navbar navbar-expand-sm bg-light navbar-light justify-content-end">
+      <a class="navbar-brand uppercase header-line" routerLink="/"> {{ title }}</a>
+      <a class="nav-link ml-auto mr-1 uppercase home-line" routerLink="/home">Home</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
+          <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse flex-grow-0" id="navbarSupportedContent">
+          <ul class="navbar-nav text-right">
+              <li class="nav-item active">
+                  <a class="nav-link uppercase about-line" routerLink="/about">About</a>
+              </li>
+          </ul>
+      </div>
+  </nav>
+
+ 

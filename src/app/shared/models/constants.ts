@@ -83,9 +83,9 @@ export const ORBITALS = [
     size: 6
   }
 ];
-export const SHELL_RATIO = 2.3;
+export const SHELL_RATIO = 4.6;
 export const ELECTRON = {
-  RATIO: 10,
+  RATIO: 15,
   SPEED: 2.5,
   SPEED_OFFSET: .25
 };

@@ -1,3 +1,53 @@
-<p>
-  detail works!
-</p>
+<div class="bg-project">
+  <div id="detail" class="grid-container">
+    <div id="sketch-detail" class="padding"></div>
+    <div class="stats padding">
+      <mat-card class="bg-color card-header-color black-font" [style.height.px]="heightLarge">
+        <mat-card-header>
+          <mat-card-title class="nunito">Represented Hashtag: #{{ cluster.hashtags[0] }}</mat-card-title>
+          <mat-card-subtitle class="nunito black-font">Cluster {{ cluster.id }}</mat-card-subtitle>
+        </mat-card-header>
+        <h3 mat-subheader class="nunito subheader margin-bottom">Tweets</h3>
+        <mat-divider class="mat-divider tweets-divider"></mat-divider>
+        <mat-card-content class="scroll" [style.height.px]="heightSmall">
+          <div>
+            <mat-card class="tweet nunito black-font" *ngFor="let tweet of cluster.documents">
+              <mat-card-header>
+                <div mat-card-avatar class="example-header-image"></div>
+                <mat-card-title class="user-size">@{{ tweet.user }}</mat-card-title>
+                <mat-card-subtitle class="nunito black-font date-size">{{ tweet.time }}</mat-card-subtitle>
+              </mat-card-header>
+              <mat-card-content>
+                {{ tweet.text }}
+              </mat-card-content>
+              <mat-card-footer class="stats">
+                <mat-icon svgIcon="likes"></mat-icon>&nbsp;&nbsp;{{ tweet.likes | number:'1.0' }} likes&nbsp;&nbsp;&nbsp;
+                <mat-icon svgIcon="retweets"></mat-icon>&nbsp;&nbsp;{{ tweet.retweets | number:'1.0' }} retweets&nbsp;
+              </mat-card-footer>
+            </mat-card>
+          </div>
+        </mat-card-content>
+      </mat-card> 
+    </div>
+  </div> 
+  <div class="padding padding-side">
+    <div class="card text-center border-secondary">
+      <div class="card-header card-header-color">
+        <h5 class="nunito margin">WORDCOUNT</h5>
+      </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-4 nunito"><h5 class=nunito>Total</h5></div>
+            <div class="col nunito" *ngFor="let wordCount of cluster.wordCount.slice(0, 5)">
+              <h5 class="nunito">{{ wordCount.word }}</h5>
+            </div>
+          </div>
+          <div class="row margin-top">
+            <div class="col-4 nunito count">{{ cluster.wordCount.length }}</div>
+            <div class="col nunito count" *ngFor="let wordCount of cluster.wordCount.slice(0, 5)">
+              {{ wordCount.count }}
+          </div>
+        </div>
+    </div>
+  </div>
+</div>

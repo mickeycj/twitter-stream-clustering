@@ -1,0 +1,120 @@
+#detail {
+  margin: 0px 35px 0;
+}
+.nunito {
+  font-family: Nunito;
+  font-weight: 800;
+}
+
+.nunito-word {
+  font-family: Nunito;
+  font-weight: 600;
+}
+
+.sub-nunito {
+  font-family: Nunito;
+}
+
+.card-header-color {
+  background-color: rgba($color: #6F5E5B, $alpha: 0.3);
+}
+
+.margin {
+  margin-top: 0.4cm;
+}
+
+.black-font {
+  color: black;
+}
+
+.user-size {
+  font-size: 16px;
+  font-weight: 800;
+}
+.date-size {
+  font-size: 12px;
+}
+
+.mat-divider {
+  border-top-width: 2px;
+  border-top-color: white;
+}
+
+.scroll {
+  margin-top: 16px;
+  overflow: scroll;
+}
+
+.padding {
+  padding-top: 20px;
+}
+.padding-side {
+  padding-left: 45px;
+  padding-right: 45px;
+}
+
+.item1 {
+  grid-area: canvas;
+}
+.item2 {
+  grid-area: stats;
+}
+.grid-container {
+  display: grid;
+  grid-template-areas: 'canvas stats';
+  grid-gap: 16px;
+}
+
+.subheader {
+  margin-left: 16px;
+}
+
+.example-header-image {
+  background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+  background-size: cover;
+}
+.tweet {
+  margin: 4px 8px 28px;
+  background-color: white;
+}
+.stats {
+  margin: 0 8px 8px;
+}
+.center {
+  text-align: center;
+  padding: 32px 0;
+}
+
+.word-count {
+  margin: 32px 0 0;
+}
+.count {
+  margin: -24px 0;
+  font-size: 30px;
+}
+
+.margin-top {
+  margin-top: 30px;
+  margin-bottom: 10px;
+}
+
+.margin-left {
+  margin-left: 150px;
+  width: 200px;
+}
+
+.bg-project {
+  background-image: url(/assets/images/bg-project-3.png);
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  -moz-background-size: cover;
+  -webkit-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  width: 100%;
+  min-width: 100%;
+  max-width: 100%;
+  min-height: 100%;
+  max-height: 100%;
+}

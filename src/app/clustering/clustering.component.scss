@@ -1,53 +1,118 @@
+.bg-project {
+  background-image: url(/assets/images/bg-project-3.png);
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  -moz-background-size: cover;
+  -webkit-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  width: 100%;
+  min-width: 100%;
+  max-width: 100%;
+  min-height: 100%;
+  max-height: 100%;
+}
+
 #sketch-clustering {
-  margin: -64PX 16px -144px;
+  margin: 0px 16px 144px;
   display: flex;
   justify-content: center;
 }
 
-#slider-size {
-  margin: 32px 30% 0;
-  border-color: #7F7FD5;
+.margin {
+  padding-top: 4cm;
+}
+
+.bg {
+	min-height: 100%;
+  min-width: 1024px;
+  width: 100%;
+  height: auto;
+  top: 0;
+  left: 0;
+}
+
+.mat-slide {
+  margin: -80px 30% 0;
+  padding-bottom: 64px;
   display: flex;
   justify-content: center;
   transform: scale(2);
-}
-
-.ftco-section-parallax {
-  position: relative;
-}
-.ftco-section-parallax .parallax-img {
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center center;
-  position: relative;
-  padding: 10em 0;
-  background: #7F7FD5;
-  background: -moz-linear-gradient(45deg, #7F7FD5 0%, #91EAE4 100%);
-  background: -webkit-gradient(left bottom, right top, color-stop(0%, #7F7FD5), color-stop(100%, #91EAE4));
-  background: -webkit-linear-gradient(45deg, #7F7FD5 0%, #91EAE4 100%);
-  background: -o-linear-gradient(45deg, #7F7FD5 0%, #91EAE4 100%);
-  background: -ms-linear-gradient(45deg, #7F7FD5 0%, #91EAE4 100%);
-  background: linear-gradient(45deg, #7F7FD5 0%, #91EAE4 100%);
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#448ef6', endColorstr='#af05a9', GradientType=1);
-}
-.ftco-section-parallax .heading-section-white h2 {
-  font-weight: 400 !important;
-}
-.ftco-section-parallax {
-  position: relative;
-
-  .parallax-img {
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center center;
-    position: relative;
-    padding: 10em 0;
-
+  .mat-slider-thumb {
+    background-color: black !important;
   }
+}
 
-  .heading-section-white {
-    h2 {
-      font-weight: 400 !important;
-    }
-  }
+.nunito {
+	font-family: Nunito;
+	font-weight: 800;
+	text-align: center;
+	padding-top: 2cm;
+}
+
+.bubbles-wrapper {
+  position: fixed;
+  top: 50%;
+  width: 100%;
+  transform: translate(50%, 50%);
+  text-align: center;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+  z-index: 1;
+}
+.bubbles {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 50px;
+  margin: auto;
+  border-radius: 100%;
+  -webkit-animation-name: up-down;
+          animation-name: up-down;
+  -webkit-animation-duration: 1.7s;
+          animation-duration: 1.7s;
+  -webkit-animation-timing-function: cubic-bezier(.42, 0, .58, 1);
+          animation-timing-function: cubic-bezier(.42, 0, .58, 1);
+  -webkit-animation-iteration-count: infinite;
+          animation-iteration-count: infinite;
+  -webkit-animation-fill-mode: both;
+          animation-fill-mode: both;
+}
+#b1 {
+  background-color: #8861A4;
+}
+#b2 {
+  background-color: #2495C1;
+  -webkit-animation-delay: 100ms;
+          animation-delay: 100ms;
+}
+#b3 {
+  background-color: #48BB6D;
+  -webkit-animation-delay: 200ms;
+          animation-delay: 200ms;
+}
+#b4 {
+  background-color: #F1C500;
+  -webkit-animation-delay: 300ms;
+          animation-delay: 300ms;
+}
+#b5 {
+  background-color: #F35957;
+  -webkit-animation-delay: 400ms;
+          animation-delay: 400ms;
+}
+@-webkit-keyframes up-down {
+  0% {-webkit-transform: translateY(-50%) scale(0.2);transform: translateY(-50%) scale(0.2);}
+  50% {-webkit-transform: translateY(50%) scale(1.2);transform: translateY(50%) scale(1.2);}
+  100% {-webkit-transform: translateY(-50%) scale(0.2);transform: translateY(-50%) scale(0.2);}
+}
+@keyframes up-down {
+  0% {-webkit-transform: translateY(-50%) scale(0.2);transform: translateY(-50%) scale(0.2);}
+  50% {-webkit-transform: translateY(50%) scale(1.2);transform: translateY(50%) scale(1.2);}
+  100% {-webkit-transform: translateY(-50%) scale(0.2);transform: translateY(-50%) scale(0.2);}
+}
+
+.display-none {
+  display: none;
 }
