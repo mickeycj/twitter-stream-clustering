@@ -1,8 +1,15 @@
-<section class="bg bg-project container-fluid"> 
-<div id="sketch-clustering"></div> 
-<mat-slider class="mat-slide"
-            [min]="minValue" [max]="maxValue"
-            [step]="stepValue" [value]="startingValue"
-            (input)="onSliderChanged($event)">
-</mat-slider>
+<section class="bg bg-project container-fluid">
+  <div class="bubbles-wrapper">
+    <div class="bubbles" id="b1"></div>
+    <div class="bubbles" id="b2"></div>
+    <div class="bubbles" id="b3"></div>
+    <div class="bubbles" id="b4"></div>
+    <div class="bubbles" id="b5"></div>
+  </div>
+  <div id="sketch-clustering"></div> 
+  <mat-slider class="mat-slide"
+              [min]="minValue" [max]="maxValue"
+              [step]="stepValue" [value]="startingValue"
+              (input)="onSliderChanged($event)">
+  </mat-slider>
 </section>

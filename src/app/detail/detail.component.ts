@@ -1,5 +1,3 @@
-declare var require: any;
-
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { DomSanitizer } from '@angular/platform-browser';
@@ -7,11 +5,11 @@ import { MatIconRegistry } from '@angular/material';
 
 import { Subscription } from 'rxjs';
 
+import p5 from 'p5';
+
 import { ClusteringService } from '../shared/services/clustering.service';
 
 import { Atom } from './../shared/models/atom.model';
-
-const p5 = require('p5');
 
 @Component({
   selector: 'app-detail',
@@ -74,7 +72,10 @@ export class DetailComponent implements OnInit, OnDestroy {
       
       const width = sketch.windowWidth * 0.4;
       const height = sketch.windowWidth * 0.45;
+      const textSize = sketch.windowWidth / 100;
+      const textLeading = sketch.windowWidth / 40;
       const framerate = 60;
+
       const brown = '#D4CECD'
       const colors = ['#94525e', '#6f5e5b', '#403f69', '#a4ae9e', '#b79147', '#b34f3d', '#6b81a9', '#ab83ae'];
       const diameter = width * 0.3;
@@ -90,10 +91,10 @@ export class DetailComponent implements OnInit, OnDestroy {
         sketch.rectMode(sketch.CENTER);
         sketch.angleMode(sketch.DEGREES);
 
-        sketch.textSize(20);
+        sketch.textSize(textSize);
         sketch.textFont('Nunito');
         sketch.textAlign(sketch.CENTER, sketch.TOP);
-        sketch.textLeading(50);
+        sketch.textLeading(textLeading);
 
         this.atom = new Atom(this.cluster['id'], '#' + this.cluster['hashtags'].join('\n#'), width / 2, height / 2, diameter, this.cluster['size'], colors[this.colorIndex], sketch);
         

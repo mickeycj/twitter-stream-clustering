@@ -1,15 +1,15 @@
-declare var require: any;
-
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { Subscription } from 'rxjs';
 
+import p5 from 'p5';
+import 'p5/lib/addons/p5.dom';
+
 import { ClusteringService } from './../shared/services/clustering.service';
 
 import { Atom } from './../shared/models/atom.model';
 
-const p5 = require('p5');
 
 @Component({
   selector: 'app-clustering',
@@ -57,7 +57,8 @@ export class ClusteringComponent implements OnInit, OnDestroy {
       };
 
       const width = sketch.windowWidth * 0.99;
-      const height = sketch.windowHeight * 0.75;
+      const height = sketch.windowHeight * 0.8;
+      const textSize = sketch.windowWidth / 135;
       const framerate = 60;
 
       const colors = ['#94525e', '#6f5e5b', '#403f69', '#a4ae9e', '#b79147', '#b34f3d', '#6b81a9', '#ab83ae'];
@@ -67,17 +68,22 @@ export class ClusteringComponent implements OnInit, OnDestroy {
       var xOffset: number;
       var yOffset: number;
 
+      var loadingAnimation: any;
+      var loadingCanvas: any;
+
       sketch.setup = () => {
         sketch.createCanvas(width, height);
         sketch.frameRate(framerate);
         sketch.ellipseMode(sketch.CENTER);
         sketch.rectMode(sketch.CENTER);
         sketch.angleMode(sketch.DEGREES);
-        sketch.textSize(14);
+        sketch.textSize(textSize);
         sketch.textFont('Nunito');
         sketch.textAlign(sketch.CENTER, sketch.CENTER);
         
         this.atoms = [];
+
+        loadingAnimation = sketch.select('.bubbles-wrapper');
 
         this.subscription = this.clusteringService.clustering.subscribe((response: Response) => {
           const clusters = response['clusters'];
@@ -109,7 +115,10 @@ export class ClusteringComponent implements OnInit, OnDestroy {
       sketch.draw = () => {
         sketch.clear();
 
-        this.atoms.filter((atom) => atom.numElectrons >= this.minSize).forEach((atom) => atom.draw(sketch));
+        if (this.atoms.length > 0) {
+          loadingAnimation.addClass('display-none');
+          this.atoms.filter((atom) => atom.numElectrons >= this.minSize).forEach((atom) => atom.draw(sketch));
+        }
       };
 
       sketch.mouseClicked = () => {
