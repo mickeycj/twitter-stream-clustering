@@ -1,37 +1,34 @@
-declare var require: any;
-
-import { COLORS, DRAG_RATIO, ORBITALS } from './constants';
+import { COLORS, ORBITALS } from './constants';
 
 import { Shell } from './shell.model';
 
-const p5 = require('p5');
-
 export class Atom {
+
+  id: number;
 
   hashtag: string;
 
-  direction: any;
   position: any;
-  velocity: any;
 
   diameter: number;
 
   numElectrons: number;
   shells: Shell[];
 
-  constructor(hashtag: string, x: number, y: number, diameter: number, numElectrons: number, sketch: any) {
+  color: string;
+
+  constructor(id: number, hashtag: string, x: number, y: number, diameter: number, numElectrons: number, color: string, sketch: any) {
+    this.id = id;
+
     this.hashtag = hashtag;
 
     this.position = sketch.createVector(x, y);
-    this.velocity = sketch.createVector(0, 0);
 
     this.diameter = diameter;
 
-    this.numElectrons = numElectrons;
-    this.shells = [];
-    this.getElectronConfiguration(numElectrons).forEach((numElectrons, index) => {
-      this.shells.push(new Shell(this, index + 1, numElectrons));
-    });
+    this.color = color;
+    
+    this.updateNumElectrons(numElectrons);
   }
 
   getElectronConfiguration(numElectrons: number) {
@@ -59,20 +56,38 @@ export class Atom {
     return configuration;
   }
 
-  updatePosition() {
-    this.position.add(this.velocity);
-    this.velocity.mult(1.0 - DRAG_RATIO);
+  updateNumElectrons(numElectrons: number) {
+    if (!this.numElectrons || this.numElectrons !== numElectrons) {
+      this.numElectrons = numElectrons;
+      this.shells = [];
+      this.getElectronConfiguration(numElectrons).forEach((numElectrons, index) => {
+        this.shells.push(new Shell(this, index + 1, numElectrons, this.color));
+      });
+    }
+  }
+
+  updatePosition(position: any) {
+    this.position = position;
+    this.shells.forEach((shell) => {
+      shell.position = position;
+      shell.electrons.forEach((electron) => electron.shellPosition = position);
+    });
+  }
+
+  updateColor(color: string) {
+    this.color = color;
+    this.shells.forEach((shell) => shell.updateColor(color));
   }
 
   draw(sketch: any) {
     this.shells.forEach((shell) => shell.draw(sketch));
 
     sketch.noStroke();
-    sketch.fill(COLORS.WHITE);
+    sketch.fill(this.color);
     sketch.ellipse(this.position.x, this.position.y, this.diameter);
 
-    sketch.fill(COLORS.GRAY)
-    sketch.text('#' + this.hashtag, this.position.x, this.position.y, this.diameter, this.diameter / 2);
+    sketch.fill(COLORS.WHITE)
+    sketch.text(this.hashtag, this.position.x, this.position.y, this.diameter, this.diameter * 0.525);
   }
 
 }
