@@ -5,6 +5,7 @@ import { BehaviorSubject } from 'rxjs';
 
 const BACKEND_URL = 'http://localhost:8000/';
 const CLUSTERING_URL = BACKEND_URL + 'clustering/';
+const RESET_URL = CLUSTERING_URL + 'reset/';
 
 @Injectable({
   providedIn: 'root'
@@ -34,6 +35,10 @@ export class ClusteringService {
       clusters.forEach((cluster: any) => cluster['size'] = Math.ceil(cluster['size'] / ratio));
     }
     this._clustering.next(clustering);
+  }
+
+  reset() {
+    return this.http.get(RESET_URL);
   }
   
 }

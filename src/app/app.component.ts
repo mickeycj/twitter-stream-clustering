@@ -17,7 +17,7 @@ export class AppComponent {
   constructor(private clusteringService: ClusteringService) { }
 
   ngOnInit() {
-    this.getClusters();
+    this.clusteringService.reset().subscribe((response: Response) => this.getClusters());
   }
 
   private getClusters() {
